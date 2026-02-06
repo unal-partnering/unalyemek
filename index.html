@@ -29,9 +29,22 @@
         .animate-bounce-slow { animation: bounce-slow 3s infinite; }
         
         html { scroll-behavior: smooth; }
+
+        /* Modal açıldığında scroll'u engellemek için */
+        body.modal-open { overflow: hidden; }
     </style>
 </head>
 <body class="bg-stone-50 text-gray-800 selection:bg-red-600 selection:text-white">
+
+    <!-- Resim Büyütme Modalı (LightBox) -->
+    <div id="imageModal" class="fixed inset-0 z-[100] bg-black/95 hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300 backdrop-blur-sm">
+        <!-- Kapatma Butonu -->
+        <button id="closeModal" class="absolute top-6 right-6 text-white/80 hover:text-white hover:bg-white/10 rounded-full p-2 transition-all z-10">
+            <i data-lucide="x" class="w-10 h-10"></i>
+        </button>
+        <!-- Büyüyen Resim -->
+        <img id="modalImage" src="" alt="Tam Ekran Görünüm" class="max-w-full max-h-[90vh] object-contain rounded shadow-2xl scale-95 transition-transform duration-300 select-none">
+    </div>
 
     <div class="fixed bottom-4 right-4 z-50 md:hidden">
         <a href="tel:+902423414041" class="flex items-center justify-center w-14 h-14 bg-green-700 text-white rounded-full shadow-lg hover:bg-green-800 transition-colors animate-bounce-slow">
@@ -162,7 +175,7 @@
                     </div>
                     
                     <div class="relative group overflow-hidden rounded-xl h-[450px] md:h-56">
-                        <!-- Şakir Ünal Fotoğrafı Güncellemesi: object-center kullanıldı -->
+                        <!-- Şakir Ünal Fotoğrafı: object-center ile ortalandı -->
                         <img src="sakirunal-unalyemek.jpg" alt="Kurucumuz Şakir Ünal" class="w-full h-full object-cover object-center">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4">
                             <div class="text-white">
@@ -576,6 +589,49 @@
                 </div>
             </div>
         </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white pt-16 pb-8 border-t border-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="relative flex items-center justify-center">
+                            <img src="logo.jpg" class="w-10 h-10 object-contain bg-white rounded-full p-1">
+                        </div>
+                        <h3 class="text-xl font-bold">ÜNAL YEMEK A.Ş.</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-sm">
+                        1998'den beri Antalya'da ev yapımı lezzetleri profesyonel hizmetle buluşturuyoruz. Düğün, nişan, cenaze ve iş yeri yemeklerinde güvenilir çözüm ortağınız.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4 text-gray-200">Hızlı Erişim</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#about" class="hover:text-red-500 transition-colors">Hakkımızda</a></li>
+                        <li><a href="#services" class="hover:text-red-500 transition-colors">Hizmetler</a></li>
+                        <li><a href="#menu" class="hover:text-red-500 transition-colors">Menü & Lezzetler</a></li>
+                        <li><a href="#contact" class="hover:text-red-500 transition-colors">Teklif İste</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-4 text-gray-200">Bölgeler</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>Kepez Catering</li>
+                        <li>Konyaaltı Yemek</li>
+                        <li>Muratpaşa Toplu Yemek</li>
+                        <li>Altınova Yemekçilik</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+                <p>© 2026 Ünal Yemek A.Ş. Tüm hakları saklıdır.</p>
+                <p>Antalya'nın Güvenilir Lezzet Markası</p>
+            </div>
+        </div>
     </footer>
 
     <script>
@@ -677,6 +733,54 @@
                 }
                 lucide.createIcons();
             });
+        });
+
+        // Image Modal Logic
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeModal = document.getElementById('closeModal');
+        
+        // Hakkımızda, Hizmetler ve Menü bölümlerindeki tüm resimlere tıklama özelliği ekle
+        const clickableImages = document.querySelectorAll('#about img, #services img, #menu img');
+
+        clickableImages.forEach(img => {
+            img.classList.add('cursor-pointer', 'transition-transform', 'hover:scale-[1.02]');
+            img.addEventListener('click', (e) => {
+                e.stopPropagation();
+                modalImg.src = img.src;
+                modal.classList.remove('hidden');
+                document.body.classList.add('modal-open');
+                
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modalImg.classList.remove('scale-95');
+                    modalImg.classList.add('scale-100');
+                }, 10);
+            });
+        });
+
+        const hideModal = () => {
+            modal.classList.add('opacity-0');
+            modalImg.classList.remove('scale-100');
+            modalImg.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.classList.remove('modal-open');
+            }, 300);
+        };
+
+        closeModal.addEventListener('click', hideModal);
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                hideModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                hideModal();
+            }
         });
 
         // --- GEMINI AI FONKSİYONU ---
