@@ -162,7 +162,8 @@
                     </div>
                     
                     <div class="relative group overflow-hidden rounded-xl h-[450px] md:h-56">
-                        <img src="sakirunal-unalyemek.jpg" alt="Kurucumuz Şakir Ünal" class="w-full h-full object-cover object-top">
+                        <!-- Şakir Ünal Fotoğrafı Güncellemesi: object-center kullanıldı -->
+                        <img src="sakirunal-unalyemek.jpg" alt="Kurucumuz Şakir Ünal" class="w-full h-full object-cover object-center">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4">
                             <div class="text-white">
                                 <p class="font-bold text-sm">Kurucumuz</p>
@@ -709,7 +710,7 @@
             try {
                 // !!! API KEY !!!
                 // Lütfen aşağıdaki tırnakların arasına kendi API anahtarınızı yapıştırın.
-                const apiKey = "AIzaSyC7oXTBtS_CZG8pslonmQ_LP2hAoJ-bglE"; 
+                const apiKey = ""; 
 
                 // !!! DÜZELTİLEN MODEL URL !!!
                 // gemini-2.5-flash-preview-09-2025 MODELİ KULLANILDI (EN KARARLI SÜRÜM)
@@ -721,14 +722,23 @@
                 - Kişi Sayısı: ${guestCount}
                 - Özel Notlar: ${notes}
 
-                Lütfen şu formatta kısa ve iştah açıcı bir çıktı ver:
-                1. Menü Başlığı
-                2. Çorba Seçimi
-                3. Ana Yemek
-                4. Yardımcı Yemek
-                5. Tatlı veya İçecek
-                
-                Yanıtı samimi, profesyonel ve Türkçe olarak ver. Sonuna "Bu menü sadece bir öneridir, detayları telefonda görüşerek tamamen size özel hale getirebiliriz." notunu ekle.`;
+                Lütfen yanıtı doğrudan HTML formatında oluştur. Markdown işaretleri (###, ** vb.) kullanma.
+                HTML çıktısını Tailwind CSS sınıfları ile şık bir şekilde tasarla.
+                Şu yapıyı kullanabilirsin:
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-serif font-bold text-red-700 border-b border-red-100 pb-2">Menü Başlığı</h3>
+                    <div class="space-y-3">
+                        <div class="bg-stone-50 p-3 rounded-lg border border-stone-100">
+                            <span class="text-red-600 font-bold block text-sm uppercase tracking-wide">Çorba</span>
+                            <span class="text-gray-800 font-medium text-lg">Çorba İsmi</span>
+                            <p class="text-gray-600 text-sm mt-1">Kısa, iştah açıcı açıklama</p>
+                        </div>
+                        <!-- Ana Yemek, Yardımcı Yemek, Tatlı/İçecek için de aynı kutu yapısını kullan -->
+                    </div>
+                    <p class="text-sm text-gray-500 italic mt-4 border-t pt-2">Bu menü sadece bir öneridir, detayları telefonda görüşerek tamamen size özel hale getirebiliriz.</p>
+                </div>
+
+                Sadece HTML kodunu döndür, başına veya sonuna başka metin ekleme.`;
 
                 const response = await fetch(
                     `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
@@ -742,10 +752,13 @@
                 if (!response.ok) throw new Error('API Hatası');
 
                 const data = await response.json();
-                const generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                let generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text;
 
                 if (generatedText) {
-                    resultText.innerText = generatedText;
+                    // Markdown code block temizliği
+                    generatedText = generatedText.replace(/```html/g, '').replace(/```/g, '');
+                    
+                    resultText.innerHTML = generatedText;
                     loadingState.classList.add('hidden');
                     resultState.classList.remove('hidden');
                 } else {
