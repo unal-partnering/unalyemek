@@ -15,7 +15,6 @@
         body { font-family: 'Inter', sans-serif; }
         h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
         
-        /* Özel Animasyonlar */
         @keyframes fade-in {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -34,53 +33,63 @@
 <body class="bg-stone-50 text-gray-800 selection:bg-red-600 selection:text-white">
 
     <div class="fixed bottom-4 right-4 z-50 md:hidden">
-        <a href="tel:+902423414041" class="flex items-center justify-center w-16 h-16 bg-green-700 text-white rounded-full shadow-lg hover:bg-green-800 transition-colors animate-bounce-slow">
-            <i data-lucide="phone" class="w-7 h-7"></i>
+        <a href="tel:+902423414041" class="flex items-center justify-center w-14 h-14 bg-green-700 text-white rounded-full shadow-lg hover:bg-green-800 transition-colors animate-bounce-slow">
+            <i data-lucide="phone" class="w-6 h-6"></i>
         </a>
     </div>
 
-    <nav id="navbar" class="fixed w-full z-40 transition-all duration-300 py-4 bg-transparent text-white">
-        <div class="container mx-auto px-4 md:px-6 flex justify-between items-center">
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-3 bg-transparent text-white">
+        <div class="container mx-auto px-4 flex justify-between items-center">
             
-            <div class="flex items-center gap-3 cursor-pointer" onclick="document.getElementById('hero').scrollIntoView()">
-                <div class="relative flex items-center justify-center">
-                    <img src="logo.jpg" alt="Ünal Yemek Logosu" class="w-20 h-20 object-contain bg-white rounded-full p-1 shadow-md">
+            <div class="flex items-center gap-2 md:gap-3 cursor-pointer" onclick="document.getElementById('hero').scrollIntoView()">
+                <div class="relative flex items-center justify-center shrink-0">
+                    <img src="logo.jpg" alt="Ünal Yemek Logosu" class="w-12 h-12 md:w-16 md:h-16 object-contain bg-white rounded-full p-1 shadow-md">
                 </div>
-                <div>
-                    <h1 id="nav-title" class="text-xl md:text-2xl font-bold leading-tight text-white md:text-gray-900 transition-colors">
+                <div class="flex flex-col justify-center">
+                    <h1 id="nav-title" class="text-lg md:text-2xl font-bold leading-tight text-white md:text-gray-900 transition-colors">
                         ÜNAL YEMEK
                     </h1>
-                    <span id="nav-subtitle" class="text-xs font-medium tracking-wider text-gray-200 md:text-red-700 transition-colors">
-                        A.Ş. | EST. 1998
+                    <span id="nav-subtitle" class="text-[10px] md:text-xs font-medium tracking-wider text-gray-200 md:text-red-700 transition-colors">
+                        EST. 1998
                     </span>
                 </div>
             </div>
 
-            <div class="hidden md:flex items-center gap-8">
+            <div class="hidden md:flex items-center gap-6 lg:gap-8">
                 <a href="#about" class="nav-link font-medium hover:text-red-700 transition-colors text-white shadow-black drop-shadow-md">Hakkımızda</a>
                 <a href="#services" class="nav-link font-medium hover:text-red-700 transition-colors text-white shadow-black drop-shadow-md">Hizmetler</a>
                 <a href="#ai-planner" class="nav-link font-medium hover:text-red-700 transition-colors text-white shadow-black drop-shadow-md">Menü Tasarla</a>
                 <a href="#menu" class="nav-link font-medium hover:text-red-700 transition-colors text-white shadow-black drop-shadow-md">Lezzetler</a>
                 <a href="#contact" class="nav-link font-medium hover:text-red-700 transition-colors text-white shadow-black drop-shadow-md">İletişim</a>
                 
-                <a href="tel:+902423414041" class="bg-red-700 hover:bg-red-800 text-white px-5 py-2.5 rounded-lg font-bold transition-transform transform hover:-translate-y-0.5 shadow-lg flex items-center gap-2">
+                <a href="tel:+902423414041" class="bg-red-700 hover:bg-red-800 text-white px-4 py-2 rounded-lg font-bold transition-transform transform hover:-translate-y-0.5 shadow-lg flex items-center gap-2 text-sm">
                     <i data-lucide="phone" class="w-4 h-4"></i> 0242 341 40 41
                 </a>
             </div>
 
-            <button id="menu-toggle" class="md:hidden p-2 rounded text-white transition-colors">
-                <i data-lucide="menu" class="w-7 h-7"></i>
+            <button id="menu-toggle" class="md:hidden p-2 rounded text-white bg-black/20 backdrop-blur-sm transition-colors border border-white/20">
+                <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
         </div>
 
-        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white shadow-xl border-t border-gray-100 flex flex-col p-4 animate-fade-in">
-            <a href="#about" class="mobile-link py-3 text-left text-gray-800 font-medium border-b border-gray-100">Hakkımızda</a>
-            <a href="#services" class="mobile-link py-3 text-left text-gray-800 font-medium border-b border-gray-100">Hizmetler</a>
-            <a href="#ai-planner" class="mobile-link py-3 text-left text-gray-800 font-medium border-b border-gray-100">Menü Tasarla</a>
-            <a href="#menu" class="mobile-link py-3 text-left text-gray-800 font-medium border-b border-gray-100">Lezzetler</a>
-            <a href="#contact" class="mobile-link py-3 text-left text-gray-800 font-medium">İletişim</a>
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white shadow-2xl border-t border-gray-100 flex flex-col p-4 animate-fade-in z-50">
+            <a href="#about" class="mobile-link py-4 text-left text-gray-800 font-bold text-lg border-b border-gray-100 flex justify-between items-center">
+                Hakkımızda <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
+            </a>
+            <a href="#services" class="mobile-link py-4 text-left text-gray-800 font-bold text-lg border-b border-gray-100 flex justify-between items-center">
+                Hizmetler <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
+            </a>
+            <a href="#ai-planner" class="mobile-link py-4 text-left text-red-700 font-bold text-lg border-b border-gray-100 flex justify-between items-center">
+                Menü Tasarla <i data-lucide="sparkles" class="w-4 h-4"></i>
+            </a>
+            <a href="#menu" class="mobile-link py-4 text-left text-gray-800 font-bold text-lg border-b border-gray-100 flex justify-between items-center">
+                Lezzetler <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
+            </a>
+            <a href="#contact" class="mobile-link py-4 text-left text-gray-800 font-bold text-lg flex justify-between items-center">
+                İletişim <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
+            </a>
             
-            <a href="tel:+902423414041" class="mt-4 w-full bg-red-700 text-white py-3 rounded-lg font-bold text-center flex justify-center items-center gap-2">
+            <a href="tel:+902423414041" class="mt-4 w-full bg-red-700 text-white py-4 rounded-xl font-bold text-center flex justify-center items-center gap-2 shadow-lg active:scale-95 transition-transform">
                 <i data-lucide="phone" class="w-5 h-5"></i> Hemen Ara
             </a>
         </div>
@@ -146,12 +155,12 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-col lg:flex-row items-start gap-12">
                 
-                <div class="lg:w-1/2 grid grid-cols-2 gap-4">
-                    <div class="col-span-2">
+                <div class="lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="md:col-span-2">
                         <img src="mutfak-unalyemek.jpg" alt="Mutfak Ekibi" class="rounded-2xl shadow-xl w-full h-64 object-cover">
                     </div>
                     
-                    <div class="relative group overflow-hidden rounded-xl h-56">
+                    <div class="relative group overflow-hidden rounded-xl h-64 md:h-56">
                         <img src="sakirunal-unalyemek.jpg" alt="Kurucumuz Şakir Ünal" class="w-full h-full object-cover object-bottom">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4">
                             <div class="text-white">
@@ -161,7 +170,7 @@
                         </div>
                     </div>
                     
-                    <div class="h-56 overflow-hidden rounded-xl">
+                    <div class="h-64 md:h-56 overflow-hidden rounded-xl">
                         <img src="image_7568a5.jpg" alt="Kazan" class="rounded-xl shadow-lg w-full h-full object-cover">
                     </div>
                 </div>
@@ -268,9 +277,9 @@
 
     <section id="ai-planner" class="py-20 bg-gradient-to-br from-red-50 to-white border-y border-red-100">
         <div class="container mx-auto px-4">
-            <div class="flex flex-col lg:flex-row items-center gap-12">
+            <div class="flex flex-col lg:flex-row items-stretch gap-12">
                 
-                <div class="lg:w-1/2">
+                <div class="w-full lg:w-1/2">
                     <div class="inline-flex items-center gap-2 bg-red-100 text-red-800 px-4 py-1 rounded-full text-sm font-bold mb-4">
                         <i data-lucide="sparkles" class="w-4 h-4"></i> Gemini AI Destekli
                     </div>
@@ -311,34 +320,39 @@
                     </div>
                 </div>
 
-                <div class="lg:w-1/2">
-                    <div class="relative min-h-[400px] flex items-center justify-center">
-                        <div class="absolute inset-0 bg-stone-900 rounded-2xl transform rotate-2 opacity-10"></div>
-                        <div class="absolute inset-0 bg-white rounded-2xl shadow-xl border border-gray-100 transform -rotate-1 flex flex-col p-8">
-                            <div class="flex items-center justify-center mb-6">
+                <div class="w-full lg:w-1/2 flex">
+                    <div class="relative w-full min-h-[400px] flex items-center justify-center">
+                        <div class="absolute inset-0 bg-stone-900 rounded-2xl transform lg:rotate-2 opacity-10"></div>
+                        
+                        <div class="absolute inset-0 bg-white rounded-2xl shadow-xl border border-gray-100 transform lg:-rotate-1 flex flex-col p-6 md:p-8 w-full h-full">
+                            
+                            <div class="flex items-center justify-center mb-6 shrink-0">
                                 <div class="relative flex items-center justify-center">
-                                    <img src="logo.jpg" class="w-20 h-20 object-contain bg-white rounded-full p-1 shadow-md">
+                                    <img src="logo.jpg" class="w-16 h-16 md:w-20 md:h-20 object-contain bg-white rounded-full p-1 shadow-md">
                                 </div>
                             </div>
                             
-                            <div id="aiDefaultState" class="flex flex-col items-center justify-center text-center h-full text-gray-400">
-                                <i data-lucide="utensils" class="w-16 h-16 mb-4 text-red-100"></i>
-                                <h4 class="text-xl font-bold text-gray-300 mb-2">Menü Bekleniyor</h4>
-                                <p class="text-sm text-gray-400 max-w-xs">Sol taraftaki formu doldurup butona bastığınızda, yapay zeka size özel bir menü taslağı hazırlayacaktır.</p>
-                            </div>
-
-                            <div id="aiLoadingState" class="hidden flex flex-col items-center justify-center h-full">
-                                <i data-lucide="loader" class="w-12 h-12 text-red-700 animate-spin mb-4"></i>
-                                <span class="text-gray-600 font-bold">Yapay Zeka Menüyü Hazırlıyor...</span>
-                            </div>
-
-                            <div id="aiResultState" class="hidden animate-fade-in text-left space-y-4">
-                                <div id="aiResultText" class="prose prose-stone prose-sm max-w-none whitespace-pre-line text-gray-700"></div>
-                                <div class="pt-4 border-t border-dashed border-gray-300 mt-4">
-                                    <button onclick="document.getElementById('contact').scrollIntoView()" class="w-full bg-stone-800 text-white py-2 rounded-lg text-sm font-bold hover:bg-black transition-colors">
-                                        Bu Menü İçin Fiyat Alın
-                                    </button>
+                            <div class="flex-grow overflow-y-auto">
+                                <div id="aiDefaultState" class="flex flex-col items-center justify-center text-center h-full text-gray-400">
+                                    <i data-lucide="utensils" class="w-12 h-12 md:w-16 md:h-16 mb-4 text-red-100"></i>
+                                    <h4 class="text-lg md:text-xl font-bold text-gray-300 mb-2">Menü Bekleniyor</h4>
+                                    <p class="text-sm text-gray-400 max-w-xs">Sol taraftaki formu doldurup butona bastığınızda, yapay zeka size özel bir menü taslağı hazırlayacaktır.</p>
                                 </div>
+
+                                <div id="aiLoadingState" class="hidden flex flex-col items-center justify-center h-full">
+                                    <i data-lucide="loader" class="w-10 h-10 md:w-12 md:h-12 text-red-700 animate-spin mb-4"></i>
+                                    <span class="text-gray-600 font-bold">Yapay Zeka Menüyü Hazırlıyor...</span>
+                                </div>
+
+                                <div id="aiResultState" class="hidden animate-fade-in text-left space-y-4">
+                                    <div id="aiResultText" class="prose prose-stone prose-sm max-w-none whitespace-pre-line text-gray-700"></div>
+                                </div>
+                            </div>
+
+                            <div class="pt-4 border-t border-dashed border-gray-300 mt-auto shrink-0">
+                                <button onclick="document.getElementById('contact').scrollIntoView()" class="w-full bg-stone-800 text-white py-3 rounded-lg text-sm font-bold hover:bg-black transition-colors">
+                                    Bu Menü İçin Fiyat Alın
+                                </button>
                             </div>
 
                         </div>
@@ -571,7 +585,7 @@
                         <div class="relative flex items-center justify-center">
                             <img src="logo.jpg" class="w-10 h-10 object-contain bg-white rounded-full p-1">
                         </div>
-                        <h3 class="text-xl font-bold">ÜNAL YEMEKÇİLİK A.Ş.</h3>
+                        <h3 class="text-xl font-bold">ÜNAL YEMEK A.Ş.</h3>
                     </div>
                     <p class="text-gray-400 text-sm leading-relaxed max-w-sm">
                         1998'den beri Antalya'da ev yapımı lezzetleri profesyonel hizmetle buluşturuyoruz. Düğün, nişan, cenaze ve iş yeri yemeklerinde güvenilir çözüm ortağınız.
@@ -621,7 +635,7 @@
             if (window.scrollY > 50) {
                 // Scroll Edildiğinde Beyaz Tema
                 navbar.classList.add('bg-white', 'shadow-md', 'py-2');
-                navbar.classList.remove('bg-transparent', 'text-white', 'py-4');
+                navbar.classList.remove('bg-transparent', 'text-white', 'py-3');
                 navbar.classList.add('text-gray-900');
                 
                 navTitle.classList.remove('text-white', 'md:text-gray-900');
@@ -630,8 +644,8 @@
                 navSubtitle.classList.remove('text-gray-200');
                 navSubtitle.classList.add('text-red-700');
 
-                menuToggle.classList.remove('text-white');
-                menuToggle.classList.add('text-gray-800');
+                menuToggle.classList.remove('text-white', 'border-white/20');
+                menuToggle.classList.add('text-gray-800', 'border-gray-200');
 
                 navLinks.forEach(link => {
                     link.classList.remove('text-white', 'shadow-black');
@@ -640,7 +654,7 @@
             } else {
                 // En Üstteyken Şeffaf Tema
                 navbar.classList.remove('bg-white', 'shadow-md', 'py-2', 'text-gray-900');
-                navbar.classList.add('bg-transparent', 'text-white', 'py-4');
+                navbar.classList.add('bg-transparent', 'text-white', 'py-3');
                 
                 navTitle.classList.add('text-white');
                 navTitle.classList.remove('text-gray-900');
@@ -648,8 +662,8 @@
                 navSubtitle.classList.add('text-gray-200');
                 navSubtitle.classList.remove('text-red-700');
 
-                menuToggle.classList.add('text-white');
-                menuToggle.classList.remove('text-gray-800');
+                menuToggle.classList.add('text-white', 'border-white/20');
+                menuToggle.classList.remove('text-gray-800', 'border-gray-200');
 
                 navLinks.forEach(link => {
                     link.classList.add('text-white', 'shadow-black');
@@ -658,7 +672,7 @@
             }
         });
 
-        // Mobil Menü Mantığı
+        // Mobil Menü Mantığı (Düzeltildi)
         const mobileMenu = document.getElementById('mobile-menu');
         let isMenuOpen = false;
 
@@ -666,10 +680,27 @@
             isMenuOpen = !isMenuOpen;
             if (isMenuOpen) {
                 mobileMenu.classList.remove('hidden');
-                menuToggle.innerHTML = '<i data-lucide="x" class="w-7 h-7"></i>';
+                menuToggle.innerHTML = '<i data-lucide="x" class="w-6 h-6"></i>';
+                // Menü açıldığında navbar'ı beyaz yap ki görünsün
+                navbar.classList.add('bg-white');
+                navbar.classList.remove('bg-transparent');
+                navTitle.classList.add('text-gray-900');
+                navTitle.classList.remove('text-white');
+                menuToggle.classList.add('text-gray-900');
+                menuToggle.classList.remove('text-white');
             } else {
                 mobileMenu.classList.add('hidden');
-                menuToggle.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
+                menuToggle.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
+                
+                // Eğer sayfa en üstteyse şeffaflığı geri getir
+                if (window.scrollY <= 50) {
+                    navbar.classList.remove('bg-white');
+                    navbar.classList.add('bg-transparent');
+                    navTitle.classList.remove('text-gray-900');
+                    navTitle.classList.add('text-white');
+                    menuToggle.classList.remove('text-gray-900');
+                    menuToggle.classList.add('text-white');
+                }
             }
             lucide.createIcons();
         });
@@ -679,34 +710,38 @@
             link.addEventListener('click', () => {
                 isMenuOpen = false;
                 mobileMenu.classList.add('hidden');
-                menuToggle.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
+                menuToggle.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
+                if (window.scrollY <= 50) {
+                    navbar.classList.remove('bg-white');
+                    navbar.classList.add('bg-transparent');
+                    navTitle.classList.remove('text-gray-900');
+                    navTitle.classList.add('text-white');
+                    menuToggle.classList.remove('text-gray-900');
+                    menuToggle.classList.add('text-white');
+                }
                 lucide.createIcons();
             });
         });
 
         // --- GEMINI AI FONKSİYONU ---
         async function generateMenuWithGemini() {
-            // HTML Elementlerini Al
             const eventType = document.getElementById('aiEventType').value;
             const guestCount = document.getElementById('aiGuestCount').value;
             const notes = document.getElementById('aiNotes').value;
             const errorDiv = document.getElementById('aiError');
             const aiButton = document.getElementById('aiButton');
             
-            // Görünüm Blokları
             const defaultState = document.getElementById('aiDefaultState');
             const loadingState = document.getElementById('aiLoadingState');
             const resultState = document.getElementById('aiResultState');
             const resultText = document.getElementById('aiResultText');
 
-            // Kontrol
             if (!guestCount) {
                 errorDiv.innerText = "Lütfen tahmini kişi sayısını giriniz.";
                 errorDiv.classList.remove('hidden');
                 return;
             }
 
-            // UI'ı Yükleniyor Moduna Al
             errorDiv.classList.add('hidden');
             defaultState.classList.add('hidden');
             resultState.classList.add('hidden');
@@ -716,11 +751,9 @@
             aiButton.innerHTML = '<i data-lucide="loader" class="w-5 h-5 animate-spin"></i> Hazırlanıyor...';
             lucide.createIcons();
 
-            // API İSTEĞİ
             try {
                 // !!! API KEY BURAYA !!!
                 const apiKey = "[BURAYA KOPYALADIĞIN API YAPIŞTIRACAKSIN]"; 
-                // Örnek: const apiKey = "AIzaSyD......";
 
                 const prompt = `Sen Antalya'da hizmet veren 'Ünal Yemek' isimli köklü bir catering firmasının yapay zeka asistanısın. 
                 Görevin: Müşterinin isteğine göre geleneksel Türk mutfağı ve Antalya yöresine uygun bir menü önerisi oluşturmak.
@@ -768,7 +801,6 @@
                 loadingState.classList.add('hidden');
                 defaultState.classList.remove('hidden');
             } finally {
-                // Butonu eski haline getir
                 aiButton.disabled = false;
                 aiButton.innerHTML = '<i data-lucide="sparkles" class="w-5 h-5"></i> Menünü Tasarla!';
                 lucide.createIcons();
