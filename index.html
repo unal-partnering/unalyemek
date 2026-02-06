@@ -749,7 +749,10 @@
                     }
                 );
 
-                if (!response.ok) throw new Error('API Hatası');
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error?.message || 'API Hatası: ' + response.status);
+                }
 
                 const data = await response.json();
                 let generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text;
@@ -767,10 +770,10 @@
 
             } catch (error) {
                 console.error("AI Hatası:", error);
-                errorDiv.innerText = "Bir hata oluştu. API Anahtarınızı kontrol edin.";
+                errorDiv.innerText = "Hata: " + error.message; 
                 errorDiv.classList.remove('hidden');
                 loadingState.classList.add('hidden');
-                defaultState.classList.remove('hidden');
+                // defaultState.classList.remove('hidden'); // Hata durumunda defaultState'i gösterme, hata mesajı görünsün
             } finally {
                 aiButton.disabled = false;
                 aiButton.innerHTML = '<i data-lucide="sparkles" class="w-5 h-5"></i> Menünü Tasarla!';
