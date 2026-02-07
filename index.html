@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ünal Yemek - Antalya Catering</title>
     
+    <link rel="icon" href="logo.jpg" type="image/jpeg">
+
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Lucide Icons (Düzeltilmiş CDN) -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
@@ -32,17 +33,35 @@
 
         /* Modal açıldığında scroll'u engellemek için */
         body.modal-open { overflow: hidden; }
+
+        /* 2. YENİ ANİMASYON SINIFLARI (SCROLL REVEAL) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease-out;
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 1s ease-out;
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 1s ease-out;
+        }
+        .reveal.active, .reveal-left.active, .reveal-right.active {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
     </style>
 </head>
 <body class="bg-stone-50 text-gray-800 selection:bg-red-600 selection:text-white">
 
-    <!-- Resim Büyütme Modalı (LightBox) -->
     <div id="imageModal" class="fixed inset-0 z-[100] bg-black/95 hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300 backdrop-blur-sm">
-        <!-- Kapatma Butonu -->
         <button id="closeModal" class="absolute top-6 right-6 text-white/80 hover:text-white hover:bg-white/10 rounded-full p-2 transition-all z-10">
             <i data-lucide="x" class="w-10 h-10"></i>
         </button>
-        <!-- Büyüyen Resim -->
         <img id="modalImage" src="" alt="Tam Ekran Görünüm" class="max-w-full max-h-[90vh] object-contain rounded shadow-2xl scale-95 transition-transform duration-300 select-none">
     </div>
 
@@ -116,8 +135,7 @@
         </div>
 
         <div class="container mx-auto px-4 relative z-10 text-white pt-20">
-            <div class="max-w-3xl">
-                <div class="inline-flex items-center gap-2 bg-red-700/90 px-4 py-1 rounded-full text-sm font-bold mb-6 backdrop-blur-sm">
+            <div class="max-w-3xl reveal"> <div class="inline-flex items-center gap-2 bg-red-700/90 px-4 py-1 rounded-full text-sm font-bold mb-6 backdrop-blur-sm">
                     <i data-lucide="star" class="w-4 h-4 fill-white text-white"></i>
                     1998'den Beri Antalya'nın Lezzeti
                 </div>
@@ -142,8 +160,7 @@
         </div>
     </section>
 
-    <div class="bg-white py-10 shadow-lg relative z-20 -mt-2 mx-4 md:mx-auto max-w-6xl rounded-xl">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 px-6 text-center divide-x divide-gray-100">
+    <div class="bg-white py-10 shadow-lg relative z-20 -mt-2 mx-4 md:mx-auto max-w-6xl rounded-xl reveal"> <div class="grid grid-cols-2 md:grid-cols-4 gap-6 px-6 text-center divide-x divide-gray-100">
             <div class="flex flex-col items-center">
                 <span class="text-3xl font-bold text-red-700 block mb-1">26+</span>
                 <span class="text-gray-600 text-sm font-medium">Yıllık Tecrübe</span>
@@ -169,15 +186,13 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-col lg:flex-row items-start gap-12">
                 
-                <div class="w-full lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="md:col-span-2">
+                <div class="w-full lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-4 reveal-left"> <div class="md:col-span-2">
                         <img src="mutfak-unalyemek.jpg" alt="Mutfak Ekibi" class="rounded-2xl shadow-xl w-full h-64 object-cover">
                     </div>
                     
                     <div class="relative group overflow-hidden rounded-xl h-[450px] md:h-56">
-                        <!-- Şakir Ünal Fotoğrafı: object-center ile ortalandı -->
                         <img src="sakirunal-unalyemek.jpg" alt="Kurucumuz Şakir Ünal" class="w-full h-full object-cover object-center">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4 pointer-events-none"> <!-- pointer-events-none eklendi -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4 pointer-events-none">
                             <div class="text-white">
                                 <p class="font-bold text-sm">Kurucumuz</p>
                                 <p class="text-lg font-serif">Şakir Ünal</p>
@@ -190,15 +205,14 @@
                     </div>
                 </div>
 
-                <div class="w-full lg:w-1/2 pt-4">
-                    <h3 class="text-red-700 font-bold uppercase tracking-wide mb-2">Hakkımızda</h3>
+                <div class="w-full lg:w-1/2 pt-4 reveal-right"> <h3 class="text-red-700 font-bold uppercase tracking-wide mb-2">Hakkımızda</h3>
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 font-serif">
                         Aile Sıcaklığı, Kurumsal Güvence
                     </h2>
                     <p class="text-gray-600 leading-relaxed mb-6">
                         1998 yılında <strong>Şakir Ünal</strong> önderliğinde küçük bir aile işletmesi olarak Antalya'da çıktığımız lezzet yolculuğuna, bugün şehrin en güvenilir catering markalarından biri olarak devam ediyoruz. 
                         <br><br>
-                        Ünal Yemek A.Ş. olarak standart, fabrikasyon yemek üretiminden uzak duruyoruz. Tencere yemeklerinin bereketini ve lezzetini, hijyenik ve modern tesisimizde koruyoruz.
+                        Ünal Yemek A.Ş. olarak standart, fabrikasyon yemek üretiminden uzak duruyoruz. Tencere yemeklerinin bereketini ve lezzetini, hijyenik ve modern tesisimizde koruyoruz. Bizim için her organizasyon özeldir.
                     </p>
                     
                     <ul class="space-y-4 mb-8">
@@ -229,15 +243,14 @@
 
     <section id="services" class="py-20 bg-white">
         <div class="container mx-auto px-4">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-serif">Hizmetlerimiz</h2>
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal"> <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-serif">Hizmetlerimiz</h2>
                 <p class="text-gray-600 text-lg">
                     Standart paketlere sıkışıp kalmayın. İhtiyacınıza göre şekillenen, <span class="text-red-700 font-bold">tamamen esnek</span> hizmet modelleri sunuyoruz.
                 </p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="group bg-stone-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-stone-100">
+                <div class="group bg-stone-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-stone-100 reveal">
                     <div class="h-56 overflow-hidden relative">
                         <img src="image_755d81.jpg" alt="Kurumsal Yemek" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent pointer-events-none"></div>
@@ -252,7 +265,7 @@
                     </div>
                 </div>
 
-                <div class="group bg-stone-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-stone-100">
+                <div class="group bg-stone-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-stone-100 reveal">
                     <div class="h-56 overflow-hidden relative">
                         <img src="mevlut-unalyemek.jpg" alt="Mevlit Yemekleri" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent pointer-events-none"></div>
@@ -267,7 +280,7 @@
                     </div>
                 </div>
 
-                <div class="group bg-stone-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-stone-100">
+                <div class="group bg-stone-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-stone-100 reveal">
                     <div class="h-56 overflow-hidden relative">
                         <img src="okul-unalyemek.jpg" alt="Okul Yemekhanesi" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent pointer-events-none"></div>
@@ -283,7 +296,7 @@
                 </div>
             </div>
             
-            <div class="mt-12 bg-red-50 border border-red-100 p-6 rounded-xl text-center">
+            <div class="mt-12 bg-red-50 border border-red-100 p-6 rounded-xl text-center reveal">
                 <h4 class="font-bold text-red-800 text-lg mb-2">💡 Bütçenize Uygun Çözümler</h4>
                 <p class="text-gray-700">"Sadece yemek teslimi mi istiyorsunuz, yoksa tam kapsamlı kurulum ve garson hizmeti mi? Her şey karşılıklı anlaşmaya bağlı."</p>
             </div>
@@ -294,8 +307,7 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-col lg:flex-row items-stretch gap-12">
                 
-                <div class="w-full lg:w-1/2">
-                    <div class="inline-flex items-center gap-2 bg-red-100 text-red-800 px-4 py-1 rounded-full text-sm font-bold mb-4">
+                <div class="w-full lg:w-1/2 reveal-left"> <div class="inline-flex items-center gap-2 bg-red-100 text-red-800 px-4 py-1 rounded-full text-sm font-bold mb-4">
                         <i data-lucide="sparkles" class="w-4 h-4"></i> Gemini AI Destekli
                     </div>
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 font-serif">
@@ -335,8 +347,7 @@
                     </div>
                 </div>
 
-                <div class="w-full lg:w-1/2 flex">
-                    <div class="relative w-full min-h-[400px] flex items-center justify-center">
+                <div class="w-full lg:w-1/2 flex reveal-right"> <div class="relative w-full min-h-[400px] flex items-center justify-center">
                         <div class="absolute inset-0 bg-stone-900 rounded-2xl transform lg:rotate-2 opacity-10"></div>
                         <div class="absolute inset-0 bg-white rounded-2xl shadow-xl border border-gray-100 transform lg:-rotate-1 flex flex-col p-6 md:p-8 w-full h-full">
                             
@@ -380,7 +391,7 @@
         <div class="absolute top-0 right-0 w-64 h-64 bg-red-600 rounded-full opacity-10 filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
         
         <div class="container mx-auto px-4 relative z-10">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-gray-700 pb-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-gray-700 pb-6 reveal">
                 <div>
                     <h3 class="text-red-500 font-bold uppercase tracking-wide mb-2">Mutfağımızdan</h3>
                     <h2 class="text-3xl md:text-5xl font-bold font-serif">Geleneksel Lezzetlerimiz</h2>
@@ -389,7 +400,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-stone-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all">
+                <div class="bg-stone-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all reveal">
                     <img src="4-tavuk-menu-unalyemek.jpg" alt="Tavuklu Pilav" class="w-full h-56 object-cover">
                     <div class="p-5">
                         <h4 class="text-xl font-bold mb-2">Geleneksel Ana Yemekler</h4>
@@ -397,7 +408,7 @@
                     </div>
                 </div>
 
-                <div class="bg-stone-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all">
+                <div class="bg-stone-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all reveal">
                     <img src="sambali-unalyemek.jpg" alt="Tatlılar" class="w-full h-56 object-cover">
                     <div class="p-6">
                         <h4 class="text-xl font-bold text-yellow-500 mb-2">Türk Tatlıları</h4>
@@ -405,7 +416,7 @@
                     </div>
                 </div>
 
-                <div class="bg-stone-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all">
+                <div class="bg-stone-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all reveal">
                     <img src="organizasyon2-unalyemek.jpg" alt="Organizasyon" class="w-full h-56 object-cover">
                     <div class="p-5">
                         <h4 class="text-xl font-bold mb-2">Toplu Organizasyonlar</h4>
@@ -420,8 +431,7 @@
         <div class="container mx-auto px-4">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 
-                <div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8 font-serif">Neden Ünal Yemek?</h2>
+                <div class="reveal-left"> <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8 font-serif">Neden Ünal Yemek?</h2>
                     <div class="space-y-6">
                         <div class="flex gap-4">
                             <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-red-700 flex-shrink-0">
@@ -453,8 +463,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
-                    <h3 class="text-2xl font-bold mb-6 text-center text-gray-800">Hizmet Bölgelerimiz</h3>
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 reveal-right"> <h3 class="text-2xl font-bold mb-6 text-center text-gray-800">Hizmet Bölgelerimiz</h3>
                     <div class="grid grid-cols-2 gap-4 mb-8">
                         <div class="bg-stone-50 p-4 rounded-lg text-center border border-stone-200">
                             <span class="block font-bold text-red-700 text-lg">Kepez</span>
@@ -480,7 +489,7 @@
     </section>
 
     <section class="bg-red-700 py-12 text-white">
-        <div class="container mx-auto px-4 text-center">
+        <div class="container mx-auto px-4 text-center reveal">
             <h2 class="text-3xl font-bold mb-6">Etkinliğiniz İçin Fiyat Almak İster misiniz?</h2>
             <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">Sizi dinliyor, bütçenize ve isteklerinize en uygun menüyü birlikte oluşturuyoruz.</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -495,7 +504,7 @@
         <div class="container mx-auto px-4">
             <div class="grid lg:grid-cols-5 gap-8">
                 
-                <div class="lg:col-span-3 bg-white p-8 rounded-2xl shadow-sm">
+                <div class="lg:col-span-3 bg-white p-8 rounded-2xl shadow-sm reveal-left">
                     <h3 class="text-2xl font-bold mb-6 text-gray-800">Bize Ulaşın / Teklif İsteyin</h3>
                     <form class="space-y-4" onsubmit="event.preventDefault(); alert('Mesajınız alınmıştır! Size en kısa sürede döneceğiz.');">
                         <div class="grid md:grid-cols-2 gap-4">
@@ -537,7 +546,7 @@
                     </form>
                 </div>
 
-                <div class="lg:col-span-2 space-y-6">
+                <div class="lg:col-span-2 space-y-6 reveal-right">
                     <div class="bg-white p-8 rounded-2xl shadow-sm">
                         <h3 class="text-xl font-bold mb-6 text-gray-800">İletişim Bilgileri</h3>
                         <div class="space-y-6">
@@ -587,6 +596,49 @@
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3190.237270921471!2d30.7628!3d36.9312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c39aaed8630001%3A0x633519398414441e!2sAlt%C4%B1nova%20Sinan%2C%20%C5%9Eelale%20Sk.%20No%3A54%2C%2007260%20Kepez%2FAntalya!5e0!3m2!1str!2str!4v1698765432100!5m2!1str!2str" width="100%" height="100%" style="border:0" allowfullscreen="" loading="lazy" class="absolute inset-0 w-full h-full"></iframe>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white pt-16 pb-8 border-t border-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="relative flex items-center justify-center">
+                            <img src="logo.jpg" class="w-10 h-10 object-contain bg-white rounded-full p-1">
+                        </div>
+                        <h3 class="text-xl font-bold">ÜNAL YEMEK A.Ş.</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-sm">
+                        1998'den beri Antalya'da ev yapımı lezzetleri profesyonel hizmetle buluşturuyoruz. Düğün, nişan, cenaze ve iş yeri yemeklerinde güvenilir çözüm ortağınız.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4 text-gray-200">Hızlı Erişim</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#about" class="hover:text-red-500 transition-colors">Hakkımızda</a></li>
+                        <li><a href="#services" class="hover:text-red-500 transition-colors">Hizmetler</a></li>
+                        <li><a href="#menu" class="hover:text-red-500 transition-colors">Menü & Lezzetler</a></li>
+                        <li><a href="#contact" class="hover:text-red-500 transition-colors">Teklif İste</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-4 text-gray-200">Bölgeler</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>Kepez Catering</li>
+                        <li>Konyaaltı Yemek</li>
+                        <li>Muratpaşa Toplu Yemek</li>
+                        <li>Altınova Yemekçilik</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+                <p>© 2026 Ünal Yemek A.Ş. Tüm hakları saklıdır.</p>
+                <p>Antalya'nın Güvenilir Lezzet Markası</p>
             </div>
         </div>
     </footer>
@@ -697,7 +749,6 @@
         const modalImg = document.getElementById('modalImage');
         const closeModal = document.getElementById('closeModal');
         
-        // Hakkımızda, Hizmetler ve Menü bölümlerindeki tüm resimlere tıklama özelliği ekle
         const clickableImages = document.querySelectorAll('#about img, #services img, #menu img');
 
         clickableImages.forEach(img => {
@@ -740,6 +791,27 @@
             }
         });
 
+        // SCROLL REVEAL LOGIC (YENİ EKLENEN KISIM)
+        // Sayfa kaydırıldıkça elementleri görünür yapar
+        const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 100; // Elementin ne kadarının görünmesi gerektiği
+
+            revealElements.forEach((element) => {
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        // Sayfa yüklendiğinde de bir kez çalıştır (en üstteki elemanlar görünsün diye)
+        revealOnScroll();
+
+
         // --- GEMINI AI FONKSİYONU ---
         async function generateMenuWithGemini() {
             const eventType = document.getElementById('aiEventType').value;
@@ -770,11 +842,9 @@
 
             try {
                 // !!! API KEY !!!
-                // Lütfen aşağıdaki tırnakların arasına kendi API anahtarınızı yapıştırın.
                 const apiKey = "AIzaSyC7oXTBtS_CZG8pslonmQ_LP2hAoJ-bglE"; 
 
                 // !!! DÜZELTİLEN MODEL URL !!!
-                // Kullanıcı isteği üzerine model ismi güncellendi
                 const prompt = `Sen Antalya'da hizmet veren 'Ünal Yemek' isimli köklü bir catering firmasının yapay zeka asistanısın. 
                 Görevin: Müşterinin isteğine göre geleneksel Türk mutfağı ve Antalya yöresine uygun bir menü önerisi oluşturmak.
                 
@@ -782,6 +852,15 @@
                 - Etkinlik Türü: ${eventType}
                 - Kişi Sayısı: ${guestCount}
                 - Özel Notlar: ${notes}
+
+                Lütfen şu formatta kısa ve iştah açıcı bir çıktı ver:
+                1. Menü Başlığı
+                2. Çorba Seçimi
+                3. Ana Yemek
+                4. Yardımcı Yemek
+                5. Tatlı veya İçecek
+                
+                Yanıtı samimi, profesyonel ve Türkçe olarak ver. Sonuna "Bu menü sadece bir öneridir, detayları telefonda görüşerek tamamen size özel hale getirebiliriz." notunu ekle.
 
                 Lütfen yanıtı doğrudan HTML formatında oluştur. Markdown işaretleri (###, ** vb.) kullanma.
                 HTML çıktısını Tailwind CSS sınıfları ile şık bir şekilde tasarla.
@@ -794,8 +873,7 @@
                             <span class="text-gray-800 font-medium text-lg">Çorba İsmi</span>
                             <p class="text-gray-600 text-sm mt-1">Kısa, iştah açıcı açıklama</p>
                         </div>
-                        <!-- Ana Yemek, Yardımcı Yemek, Tatlı/İçecek için de aynı kutu yapısını kullan -->
-                    </div>
+                        </div>
                     <p class="text-sm text-gray-500 italic mt-4 border-t pt-2">Bu menü sadece bir öneridir, detayları telefonda görüşerek tamamen size özel hale getirebiliriz.</p>
                 </div>
 
@@ -834,7 +912,6 @@
                 errorDiv.innerText = "Hata: " + error.message; 
                 errorDiv.classList.remove('hidden');
                 loadingState.classList.add('hidden');
-                // defaultState.classList.remove('hidden'); // Hata durumunda defaultState'i gösterme, hata mesajı görünsün
             } finally {
                 aiButton.disabled = false;
                 aiButton.innerHTML = '<i data-lucide="sparkles" class="w-5 h-5"></i> Menünü Tasarla!';
