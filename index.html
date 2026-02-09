@@ -385,7 +385,7 @@
         window.addEventListener('scroll', revealOnScroll);
         revealOnScroll();
 
-        // --- POLLINATIONS AI (AKILLI MENÜ SİSTEMİ) ---
+        // --- POLLINATIONS AI (AKILLI VE TEMİZ MENÜ SİSTEMİ) ---
         async function generateMenuWithPollinations() {
             const eventType = document.getElementById('aiEventType').value;
             const guestCount = document.getElementById('aiGuestCount').value;
@@ -410,42 +410,34 @@
             aiButton.disabled = true;
 
             try {
-                // --- BURASI ÇOK ÖNEMLİ: ETKİNLİĞE GÖRE ZORLAŞTIRILMIŞ MENÜ KURALLARI ---
-                let instruction = "";
-                
-                if (eventType.includes("Düğün") || eventType.includes("Mevlit") || eventType.includes("Cenaze")) {
-                    instruction = "BU BİR CEMİYET YEMEĞİDİR. SADECE KLASİK TÜRK YEMEKLERİ YAZ. Seçenek 1: Et Kavurma ve Pirinç Pilavı. Seçenek 2: Tavuk Sote ve Pirinç Pilavı. Yanına mutlaka Ayran veya Cacık ekle. Tatlı olarak Helva veya Baklava yaz. ASLA kebap, döner veya uydurma yemek yazma.";
-                } else if (eventType.includes("İftar")) {
-                    instruction = "BU BİR RAMAZAN İFTAR YEMEĞİDİR. Başlangıca MUTLAKA 'İftariyelik Tabağı (Hurma, Zeytin)' ve Çorba ekle. Ana yemek olarak Hünkarbeğendi, Tas Kebabı veya Kuzu Tandır gibi klasikler seç. Tatlı olarak Güllaç veya Kadayıf seç.";
-                } else if (eventType.includes("Piknik")) {
-                    instruction = "BU BİR PİKNİK MENÜSÜDÜR. Izgara Köfte, Tavuk Şiş, Sucuk Ekmek gibi mangal ürünleri seç. Yanına Piyaz ve Közlenmiş Biber ekle.";
-                } else {
-                    instruction = "BU BİR İŞ YERİ YEMEĞİDİR. Dengeli bir öğle yemeği menüsü hazırla. Örn: Sebzeli Kebap, Musakka, Karnıyarık.";
-                }
-
-                // AI'YA GİDEN KESİN KOMUTLAR
+                // --- ÇOK SIKI KURALLAR (WHITELIST) ---
                 const prompt = `Sen Antalya Ünal Yemek catering firmasının 30 yıllık baş aşçısısın.
                 
-                GÖREVİN: ${instruction}
+                GÖREVİN: Aşağıdaki bilgilere göre 2 FARKLI MENÜ ALTERNATİFİ (Seçenek 1, Seçenek 2) oluştur.
                 
-                Müşteri: ${eventType}, ${guestCount} kişi. Not: ${notes} (Eğer 'ekonomik' denirse asla pahalı et yazma, tavuk/bakliyat yaz).
+                Müşteri: ${eventType}, ${guestCount} kişi. Not: ${notes}.
 
-                KESİN KURALLAR:
-                1. SADECE 2 (İKİ) farklı menü seçeneği sun.
-                2. Her kategoriye SADECE 1 (BİR) yemek yaz. Asla liste yapma. 
-                3. Yemek isimleri %100 Türkçe ve Geleneksel olsun (Örn: "Kuşbaşılı Biber Dolması" YOK, "Etli Biber Dolması" VAR).
-                4. "Kufta", "Gravy" gibi yabancı kelimeler YASAK.
-                5. İçki YASAK. Sadece Ayran, Şalgam, Kola vb.
+                ÖNEMLİ KURALLAR:
+                1. SADECE AŞAĞIDAKİ YEMEK LİSTESİNDEN SEÇİM YAP. BAŞKA YEMEK YAZMA.
+                   - Çorbalar: Mercimek, Ezogelin, Yayla, Domates, Tarhana, Tavuk Suyu.
+                   - Ana Yemekler (Ekonomikse): Tavuk Sote, Tavuk Döner, Kuru Fasulye, Nohut, Türlü, Musakka, Karnıyarık.
+                   - Ana Yemekler (Lüksse): Et Kavurma, Tas Kebabı, Hünkarbeğendi, Kuzu Tandır, Rosto Köfte.
+                   - Yardımcılar: Pirinç Pilavı, Bulgur Pilavı, Makarna, Su Böreği.
+                   - Tatlı/İçecek: Baklava, Şekerpare, Sütlaç, Helva, Ayran, Cacık, Kola.
+                
+                2. Menüler birbiriyle uyumlu olsun (Örn: Kuru fasulye yanına Pilav ve Cacık ver).
+                3. Yabancı kelime, uydurma yemek ismi, domuz eti, şarap ASLA kullanma.
+                4. Çıktı SADECE aşağıdaki HTML kodu olsun. Başka hiçbir yazı (düşünce, açıklama vb.) yazma.
 
-                ÇIKTI FORMATI (SADECE BUNU VER):
+                ÇIKTI FORMATI:
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="bg-stone-50 p-5 rounded-lg border border-stone-200 shadow-sm hover:shadow-md transition-shadow">
                         <h4 class="font-bold text-red-700 text-xl mb-4 border-b border-red-100 pb-2">Seçenek 1</h4>
                         <ul class="space-y-3 text-gray-700">
                             <li><span class="font-bold block text-gray-900">Çorba:</span> ...Tek Çorba...</li>
                             <li><span class="font-bold block text-gray-900">Ana Yemek:</span> ...Tek Ana Yemek...</li>
-                            <li><span class="font-bold block text-gray-900">Yardımcı:</span> ...Pilav/Makarna...</li>
-                            <li><span class="font-bold block text-gray-900">Tatlı/İçecek:</span> ...Tatlı ve İçecek...</li>
+                            <li><span class="font-bold block text-gray-900">Yardımcı:</span> ...Tek Yardımcı...</li>
+                            <li><span class="font-bold block text-gray-900">Tatlı/İçecek:</span> ...Tek Tatlı/İçecek...</li>
                         </ul>
                     </div>
                     <div class="bg-stone-50 p-5 rounded-lg border border-stone-200 shadow-sm hover:shadow-md transition-shadow">
@@ -453,22 +445,46 @@
                         <ul class="space-y-3 text-gray-700">
                             <li><span class="font-bold block text-gray-900">Çorba:</span> ...Tek Çorba...</li>
                             <li><span class="font-bold block text-gray-900">Ana Yemek:</span> ...Tek Ana Yemek...</li>
-                            <li><span class="font-bold block text-gray-900">Yardımcı:</span> ...Pilav/Makarna...</li>
-                            <li><span class="font-bold block text-gray-900">Tatlı/İçecek:</span> ...Tatlı ve İçecek...</li>
+                            <li><span class="font-bold block text-gray-900">Yardımcı:</span> ...Tek Yardımcı...</li>
+                            <li><span class="font-bold block text-gray-900">Tatlı/İçecek:</span> ...Tek Tatlı/İçecek...</li>
                         </ul>
                     </div>
                 </div>
-                <p class="text-xs text-gray-500 mt-4 text-center italic">Not: Menüler mevsim şartlarına göre değişebilir. Fiyat için arayınız.</p>`;
+                <p class="text-xs text-gray-500 mt-4 text-center italic">Not: Fiyat teklifi için arayınız.</p>`;
 
                 const encodedPrompt = encodeURIComponent(prompt);
-                const response = await fetch(`https://text.pollinations.ai/${encodedPrompt}`);
+                // model=openai parametresi ekleyerek daha akıllı bir model istiyoruz
+                const response = await fetch(`https://text.pollinations.ai/${encodedPrompt}?model=openai`);
 
                 if (!response.ok) throw new Error('Sunucu hatası: ' + response.status);
 
                 let generatedText = await response.text();
 
                 if (generatedText) {
+                    // --- TEMİZLİK ROBOTU ---
+                    // Yapay zeka bazen düşüncelerini yazar, onları temizleyelim.
+                    // Sadece <div class="grid... ile başlayan ve en sondaki </div> ile biten kısmı alalım.
+                    
+                    // 1. Markdown temizliği
                     generatedText = generatedText.replace(/```html/g, '').replace(/```/g, '');
+
+                    // 2. Düşünce balonlarını temizle (JSON formatı gelirse)
+                    try {
+                        // Eğer çıktı JSON formatındaysa ve içinde "reasoning" varsa onu atla
+                        if (generatedText.trim().startsWith('{')) {
+                             // Basitçe HTML etiketini bulup gerisini atalım
+                             const startIndex = generatedText.indexOf('<div class="grid');
+                             if (startIndex !== -1) {
+                                 generatedText = generatedText.substring(startIndex);
+                                 // Sondaki fazlalıkları da temizleyelim (örneğin "} veya " biterse)
+                                 const endIndex = generatedText.lastIndexOf('</p>') + 4;
+                                 if (endIndex > -1) generatedText = generatedText.substring(0, endIndex);
+                             }
+                        }
+                    } catch (e) {
+                        console.log("JSON parse hatası yok, devam et.");
+                    }
+
                     resultText.innerHTML = generatedText;
                     loadingState.classList.add('hidden');
                     resultState.classList.remove('hidden');
