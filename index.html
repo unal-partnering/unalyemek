@@ -24,7 +24,6 @@
         html { scroll-behavior: smooth; }
         body.modal-open { overflow: hidden; }
 
-        /* Scroll Animasyonları */
         .reveal { opacity: 0; transform: translateY(50px); transition: all 1s ease-out; }
         .reveal-left { opacity: 0; transform: translateX(-50px); transition: all 1s ease-out; }
         .reveal-right { opacity: 0; transform: translateX(50px); transition: all 1s ease-out; }
@@ -194,9 +193,10 @@
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Etkinlik Türü</label>
                             <select id="aiEventType" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 outline-none">
-                                <option value="Düğün / Mevlit / Cenaze">Düğün / Mevlit / Cenaze</option>
-                                <option value="İftar Yemeği">İftar Yemeği</option>
+                                <option value="Düğün Yemeği">Düğün Yemeği</option>
+                                <option value="Mevlit / Cenaze">Mevlit / Cenaze</option>
                                 <option value="Kurumsal / Ofis">Kurumsal / Ofis</option>
+                                <option value="İftar Yemeği">İftar Yemeği</option>
                                 <option value="Piknik / Açık Hava">Piknik / Açık Hava</option>
                             </select>
                         </div>
@@ -298,7 +298,7 @@
     <script>
         lucide.createIcons();
 
-        // Navbar & Scroll (DÜZELTİLEN KISIM: Yazılar Okunabilir Hale Getirildi)
+        // Navbar & Scroll
         const navbar = document.getElementById('navbar');
         const navTitle = document.getElementById('nav-title');
         const navSubtitle = document.getElementById('nav-subtitle');
@@ -310,16 +310,12 @@
                 // Aşağı kayınca: Beyaz arka plan, KOYU yazı
                 navbar.classList.add('bg-white', 'shadow-md', 'py-2');
                 navbar.classList.remove('bg-transparent', 'py-3');
-                
                 navTitle.classList.remove('text-white');
                 navTitle.classList.add('text-gray-900');
-                
                 navSubtitle.classList.remove('text-gray-200');
                 navSubtitle.classList.add('text-red-700');
-                
                 menuToggle.classList.remove('text-white', 'border-white/20');
                 menuToggle.classList.add('text-gray-800', 'border-gray-200');
-                
                 document.querySelectorAll('.nav-link').forEach(link => {
                     link.classList.remove('text-white', 'shadow-black', 'drop-shadow-md');
                     link.classList.add('text-gray-700');
@@ -328,16 +324,12 @@
                 // En tepede: Şeffaf arka plan, BEYAZ yazı
                 navbar.classList.remove('bg-white', 'shadow-md', 'py-2');
                 navbar.classList.add('bg-transparent', 'py-3');
-                
                 navTitle.classList.add('text-white');
                 navTitle.classList.remove('text-gray-900');
-                
                 navSubtitle.classList.add('text-gray-200');
                 navSubtitle.classList.remove('text-red-700');
-                
                 menuToggle.classList.add('text-white', 'border-white/20');
                 menuToggle.classList.remove('text-gray-800', 'border-gray-200');
-                
                 document.querySelectorAll('.nav-link').forEach(link => {
                     link.classList.add('text-white', 'shadow-black', 'drop-shadow-md');
                     link.classList.remove('text-gray-700');
@@ -410,7 +402,7 @@
             aiButton.disabled = true;
 
             try {
-                // --- GELİŞMİŞ USTA AŞÇI TALİMATLARI ---
+                // --- ÇOK SIKI KURALLAR (WHITELIST) ---
                 const prompt = `Sen Antalya Ünal Yemek catering firmasının 30 yıllık baş aşçısısın.
                 
                 GÖREVİN: Aşağıdaki bilgilere göre 2 FARKLI MENÜ ALTERNATİFİ (Seçenek 1, Seçenek 2) oluştur.
@@ -418,12 +410,16 @@
                 Müşteri: ${eventType}, ${guestCount} kişi. Not: ${notes}.
 
                 ÖNEMLİ KURALLAR:
-                1. SADECE Türk mutfağının en sevilen, klasik catering yemeklerini seç. (Örn: Et Kavurma, Tavuk Sote, Kuru Fasulye, Pilav, Musakka, Karnıyarık, İzmir Köfte).
+                1. SADECE AŞAĞIDAKİ YEMEK LİSTESİNDEN SEÇİM YAP. BAŞKA YEMEK YAZMA.
+                   - Çorbalar: Mercimek, Ezogelin, Yayla, Domates, Tarhana, Tavuk Suyu.
+                   - Ana Yemekler (Ekonomikse): Tavuk Sote, Tavuk Döner, Kuru Fasulye, Nohut, Türlü, Musakka, Karnıyarık.
+                   - Ana Yemekler (Lüksse): Et Kavurma, Tas Kebabı, Hünkarbeğendi, Kuzu Tandır, Rosto Köfte.
+                   - Yardımcılar: Pirinç Pilavı, Bulgur Pilavı, Makarna, Su Böreği.
+                   - Tatlı/İçecek: Baklava, Şekerpare, Sütlaç, Helva, Ayran, Cacık, Kola.
+                
                 2. Menüler birbiriyle uyumlu olsun (Örn: Kuru fasulye yanına Pilav ve Cacık ver).
-                3. Uydurma isimler (Kuşbaşılı biber dolması, Şehirli döner vb.) ve Yabancı kelimeler (Gravy, Kufta) ASLA kullanma.
-                4. "Ekonomik" denirse Tavuk ve Bakliyat seç. "Lüks" denirse Et seç.
-                5. Her kategoriye SADECE 1 (BİR) yemek yaz. Liste yapma.
-                6. Çıktı SADECE aşağıdaki HTML kodu olsun. Başka hiçbir yazı (düşünce, açıklama vb.) yazma.
+                3. Yabancı kelime, uydurma yemek ismi, domuz eti, şarap ASLA kullanma.
+                4. Çıktı SADECE aşağıdaki HTML kodu olsun. Başka hiçbir yazı (düşünce, açıklama vb.) yazma.
 
                 ÇIKTI FORMATI:
                 <div class="grid md:grid-cols-2 gap-6">
@@ -449,7 +445,7 @@
                 <p class="text-xs text-gray-500 mt-4 text-center italic">Not: Fiyat teklifi için arayınız.</p>`;
 
                 const encodedPrompt = encodeURIComponent(prompt);
-                // GPT-4o-Mini Modeli (Zeki ve Hızlı)
+                // model=openai parametresi ekleyerek daha akıllı bir model istiyoruz
                 const response = await fetch(`https://text.pollinations.ai/${encodedPrompt}?model=openai`);
 
                 if (!response.ok) throw new Error('Sunucu hatası: ' + response.status);
@@ -457,22 +453,28 @@
                 let generatedText = await response.text();
 
                 if (generatedText) {
-                    // --- TEMİZLİK ROBOTU (ÖNEMLİ KISIM) ---
+                    // --- TEMİZLİK ROBOTU ---
+                    // Yapay zeka bazen düşüncelerini yazar, onları temizleyelim.
+                    // Sadece <div class="grid... ile başlayan ve en sondaki </div> ile biten kısmı alalım.
                     
-                    // 1. Markdown kod bloklarını temizle
+                    // 1. Markdown temizliği
                     generatedText = generatedText.replace(/```html/g, '').replace(/```/g, '');
 
-                    // 2. Düşünce balonlarını ve JSON artıklarını temizle
-                    // <div class="grid ile başlayan yerden sonrasını al
-                    const startIndex = generatedText.indexOf('<div class="grid');
-                    if (startIndex !== -1) {
-                        generatedText = generatedText.substring(startIndex);
-                        
-                        // </p> ile biten son yerden öncesini al (fazlalıkları at)
-                        const endIndex = generatedText.lastIndexOf('</p>') + 4;
-                        if (endIndex > 0) {
-                            generatedText = generatedText.substring(0, endIndex);
+                    // 2. Düşünce balonlarını temizle (JSON formatı gelirse)
+                    try {
+                        // Eğer çıktı JSON formatındaysa ve içinde "reasoning" varsa onu atla
+                        if (generatedText.trim().startsWith('{')) {
+                             // Basitçe HTML etiketini bulup gerisini atalım
+                             const startIndex = generatedText.indexOf('<div class="grid');
+                             if (startIndex !== -1) {
+                                 generatedText = generatedText.substring(startIndex);
+                                 // Sondaki fazlalıkları da temizleyelim (örneğin "} veya " biterse)
+                                 const endIndex = generatedText.lastIndexOf('</p>') + 4;
+                                 if (endIndex > -1) generatedText = generatedText.substring(0, endIndex);
+                             }
                         }
+                    } catch (e) {
+                        console.log("JSON parse hatası yok, devam et.");
                     }
 
                     resultText.innerHTML = generatedText;
