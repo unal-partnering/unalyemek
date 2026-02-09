@@ -653,10 +653,9 @@
     </footer>
 
     <script>
-        // Sayfa Yüklendiğinde İkonları Oluştur
         lucide.createIcons();
 
-        // Navbar Scroll Değişimi
+        // --- NAVBAR VE SCROLL AYARLARI ---
         const navbar = document.getElementById('navbar');
         const navTitle = document.getElementById('nav-title');
         const navSubtitle = document.getElementById('nav-subtitle');
@@ -665,38 +664,28 @@
 
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
-                // Scroll Edildiğinde Beyaz Tema
                 navbar.classList.add('bg-white', 'shadow-md', 'py-2');
                 navbar.classList.remove('bg-transparent', 'text-white', 'py-3');
                 navbar.classList.add('text-gray-900');
-                
                 navTitle.classList.remove('text-white', 'md:text-gray-900');
                 navTitle.classList.add('text-gray-900');
-                
                 navSubtitle.classList.remove('text-gray-200');
                 navSubtitle.classList.add('text-red-700');
-
                 menuToggle.classList.remove('text-white', 'border-white/20');
                 menuToggle.classList.add('text-gray-800', 'border-gray-200');
-
                 navLinks.forEach(link => {
                     link.classList.remove('text-white', 'shadow-black');
                     link.classList.add('text-gray-700');
                 });
             } else {
-                // En Üstteyken Şeffaf Tema
                 navbar.classList.remove('bg-white', 'shadow-md', 'py-2', 'text-gray-900');
                 navbar.classList.add('bg-transparent', 'text-white', 'py-3');
-                
                 navTitle.classList.add('text-white');
                 navTitle.classList.remove('text-gray-900');
-                
                 navSubtitle.classList.add('text-gray-200');
                 navSubtitle.classList.remove('text-red-700');
-
                 menuToggle.classList.add('text-white', 'border-white/20');
                 menuToggle.classList.remove('text-gray-800', 'border-gray-200');
-
                 navLinks.forEach(link => {
                     link.classList.add('text-white', 'shadow-black');
                     link.classList.remove('text-gray-700');
@@ -704,10 +693,9 @@
             }
         });
 
-        // Mobil Menü Mantığı
+        // Mobil Menü
         const mobileMenu = document.getElementById('mobile-menu');
         let isMenuOpen = false;
-
         menuToggle.addEventListener('click', () => {
             isMenuOpen = !isMenuOpen;
             if (isMenuOpen) {
@@ -722,7 +710,6 @@
             } else {
                 mobileMenu.classList.add('hidden');
                 menuToggle.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
-                
                 if (window.scrollY <= 50) {
                     navbar.classList.remove('bg-white');
                     navbar.classList.add('bg-transparent');
@@ -735,7 +722,6 @@
             lucide.createIcons();
         });
 
-        // Mobilde linke tıklayınca menüyü kapat
         document.querySelectorAll('.mobile-link').forEach(link => {
             link.addEventListener('click', () => {
                 isMenuOpen = false;
@@ -753,11 +739,10 @@
             });
         });
 
-        // Image Modal Logic
+        // Resim Modalı
         const modal = document.getElementById('imageModal');
         const modalImg = document.getElementById('modalImage');
         const closeModal = document.getElementById('closeModal');
-        
         const clickableImages = document.querySelectorAll('#about img, #services img, #menu img');
 
         clickableImages.forEach(img => {
@@ -767,7 +752,6 @@
                 modalImg.src = img.src;
                 modal.classList.remove('hidden');
                 document.body.classList.add('modal-open');
-                
                 setTimeout(() => {
                     modal.classList.remove('opacity-0');
                     modalImg.classList.remove('scale-95');
@@ -787,27 +771,14 @@
         };
 
         closeModal.addEventListener('click', hideModal);
+        modal.addEventListener('click', (e) => { if (e.target === modal) hideModal(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.classList.contains('hidden')) hideModal(); });
 
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                hideModal();
-            }
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-                hideModal();
-            }
-        });
-
-        // SCROLL REVEAL LOGIC (YENİ EKLENEN KISIM)
-        // Sayfa kaydırıldıkça elementleri görünür yapar
+        // Scroll Animasyon
         const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-
         const revealOnScroll = () => {
             const windowHeight = window.innerHeight;
-            const elementVisible = 100; // Elementin ne kadarının görünmesi gerektiği
-
+            const elementVisible = 100;
             revealElements.forEach((element) => {
                 const elementTop = element.getBoundingClientRect().top;
                 if (elementTop < windowHeight - elementVisible) {
@@ -815,11 +786,8 @@
                 }
             });
         };
-
         window.addEventListener('scroll', revealOnScroll);
-        // Sayfa yüklendiğinde de bir kez çalıştır (en üstteki elemanlar görünsün diye)
         revealOnScroll();
-
 
         // --- HUGGING FACE AI FONKSİYONU ---
         async function generateMenuWithHF() {
@@ -828,7 +796,6 @@
             const notes = document.getElementById('aiNotes').value;
             const errorDiv = document.getElementById('aiError');
             const aiButton = document.getElementById('aiButton');
-            
             const defaultState = document.getElementById('aiDefaultState');
             const loadingState = document.getElementById('aiLoadingState');
             const resultState = document.getElementById('aiResultState');
@@ -850,50 +817,46 @@
             lucide.createIcons();
 
             try {
-                // !!! API KEY BURAYA !!!
-                const hfToken = "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"; 
+                // !!! TOKEN BURAYA !!!
+                const hfToken = "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"; 
 
-                // Model: Mistral-7B (Türkçe desteği ve instruction takibi iyidir)
-                const model = "mistralai/Mistral-7B-Instruct-v0.3";
+                // Model: Zephyr 7B (Hata vermeyen, açık kaynak model)
+                const model = "HuggingFaceH4/zephyr-7b-beta";
 
-                // Hugging Face için Prompt Yapısı ([INST]...[/INST])
-                const prompt = `<s>[INST] Sen Antalya'da hizmet veren 'Ünal Yemek' isimli köklü bir catering firmasının yapay zeka asistanısın. 
-                Görevin: Müşterinin isteğine göre geleneksel Türk mutfağı ve Antalya yöresine uygun bir menü önerisi oluşturmak.
-                
-                Müşteri Bilgileri:
-                - Etkinlik Türü: ${eventType}
+                const prompt = `<|system|>
+                Sen Antalya'da hizmet veren 'Ünal Yemek' catering firmasının asistanısın. Görevin, verilen bilgilere göre HTML formatında şık bir yemek menüsü oluşturmak. Sadece HTML kodunu ver, başka bir şey yazma.
+                </s>
+                <|user|>
+                Bilgiler:
+                - Etkinlik: ${eventType}
                 - Kişi Sayısı: ${guestCount}
-                - Özel Notlar: ${notes}
+                - Notlar: ${notes}
 
-                Lütfen şu formatta bir HTML çıktısı ver. Sadece HTML kodunu döndür, başka hiçbir açıklama yazma.
-                
-                HTML Yapısı Şöyle Olsun:
+                Lütfen şu HTML yapısını doldurarak yanıt ver (HTML dışında hiçbir metin yazma):
                 <div class="space-y-4">
-                    <h3 class="text-2xl font-serif font-bold text-red-700 border-b border-red-100 pb-2">Örnek Menü Başlığı</h3>
+                    <h3 class="text-2xl font-serif font-bold text-red-700 border-b border-red-100 pb-2">Örnek Menü</h3>
                     <div class="space-y-3">
                         <div class="bg-stone-50 p-3 rounded-lg border border-stone-100">
-                            <span class="text-red-600 font-bold block text-sm uppercase tracking-wide">Çorba</span>
+                            <span class="text-red-600 font-bold block text-sm uppercase">Çorba</span>
                             <span class="text-gray-800 font-medium text-lg">...Çorba Adı...</span>
-                            <p class="text-gray-600 text-sm mt-1">...Kısa Açıklama...</p>
                         </div>
                         <div class="bg-stone-50 p-3 rounded-lg border border-stone-100">
-                            <span class="text-red-600 font-bold block text-sm uppercase tracking-wide">Ana Yemek</span>
+                            <span class="text-red-600 font-bold block text-sm uppercase">Ana Yemek</span>
                             <span class="text-gray-800 font-medium text-lg">...Ana Yemek Adı...</span>
-                            <p class="text-gray-600 text-sm mt-1">...Kısa Açıklama...</p>
                         </div>
                         <div class="bg-stone-50 p-3 rounded-lg border border-stone-100">
-                            <span class="text-red-600 font-bold block text-sm uppercase tracking-wide">Yardımcı Yemek</span>
-                            <span class="text-gray-800 font-medium text-lg">...Yardımcı Yemek Adı...</span>
+                            <span class="text-red-600 font-bold block text-sm uppercase">Yardımcı Yemek</span>
+                            <span class="text-gray-800 font-medium text-lg">...Pilav/Makarna...</span>
                         </div>
                         <div class="bg-stone-50 p-3 rounded-lg border border-stone-100">
-                            <span class="text-red-600 font-bold block text-sm uppercase tracking-wide">Tatlı / İçecek</span>
+                            <span class="text-red-600 font-bold block text-sm uppercase">Tatlı / İçecek</span>
                             <span class="text-gray-800 font-medium text-lg">...Tatlı Adı...</span>
                         </div>
                     </div>
-                    <p class="text-sm text-gray-500 italic mt-4 border-t pt-2">Bu menü sadece bir öneridir, detayları telefonda görüşerek tamamen size özel hale getirebiliriz.</p>
+                    <p class="text-sm text-gray-500 italic mt-4">Afiyet olsun.</p>
                 </div>
-                
-                Sadece yukarıdaki HTML kodunu doldur ve ver. Markdown ('''html) kullanma. [/INST]`;
+                </s>
+                <|assistant|>`;
 
                 const response = await fetch(
                     `https://api-inference.huggingface.co/models/${model}`,
@@ -906,8 +869,8 @@
                         body: JSON.stringify({ 
                             inputs: prompt, 
                             parameters: { 
-                                max_new_tokens: 1000,
-                                return_full_text: false, // Prompt'u cevaba ekleme
+                                max_new_tokens: 600,
+                                return_full_text: false,
                                 temperature: 0.7 
                             } 
                         })
@@ -915,14 +878,13 @@
                 );
 
                 if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error || 'API Hatası: ' + response.status);
+                    const err = await response.text();
+                    throw new Error('Bağlantı hatası: ' + response.status);
                 }
 
                 const data = await response.json();
-                
-                // Hugging Face bazen array bazen obje döndürür, kontrol edelim
                 let generatedText = '';
+                
                 if (Array.isArray(data)) {
                     generatedText = data[0].generated_text;
                 } else if (data.generated_text) {
@@ -930,14 +892,13 @@
                 }
 
                 if (generatedText) {
-                    // Temizlik (Markdown işaretleri varsa kaldır)
+                    // Temizlik
                     generatedText = generatedText.replace(/```html/g, '').replace(/```/g, '');
-                    
                     resultText.innerHTML = generatedText;
                     loadingState.classList.add('hidden');
                     resultState.classList.remove('hidden');
                 } else {
-                    throw new Error('Yanıt alınamadı');
+                    throw new Error('Menü oluşturulamadı.');
                 }
 
             } catch (error) {
