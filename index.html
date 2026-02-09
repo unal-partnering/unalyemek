@@ -308,37 +308,27 @@
 
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
-                // Aşağı kayınca: Beyaz arka plan, KOYU yazı
                 navbar.classList.add('bg-white', 'shadow-md', 'py-2');
                 navbar.classList.remove('bg-transparent', 'py-3');
-                
                 navTitle.classList.remove('text-white');
                 navTitle.classList.add('text-gray-900');
-                
                 navSubtitle.classList.remove('text-gray-200');
                 navSubtitle.classList.add('text-red-700');
-                
                 menuToggle.classList.remove('text-white', 'border-white/20');
                 menuToggle.classList.add('text-gray-800', 'border-gray-200');
-                
                 document.querySelectorAll('.nav-link').forEach(link => {
                     link.classList.remove('text-white', 'shadow-black', 'drop-shadow-md');
                     link.classList.add('text-gray-700');
                 });
             } else {
-                // En tepede: Şeffaf arka plan, BEYAZ yazı
                 navbar.classList.remove('bg-white', 'shadow-md', 'py-2');
                 navbar.classList.add('bg-transparent', 'py-3');
-                
                 navTitle.classList.add('text-white');
                 navTitle.classList.remove('text-gray-900');
-                
                 navSubtitle.classList.add('text-gray-200');
                 navSubtitle.classList.remove('text-red-700');
-                
                 menuToggle.classList.add('text-white', 'border-white/20');
                 menuToggle.classList.remove('text-gray-800', 'border-gray-200');
-                
                 document.querySelectorAll('.nav-link').forEach(link => {
                     link.classList.add('text-white', 'shadow-black', 'drop-shadow-md');
                     link.classList.remove('text-gray-700');
@@ -371,7 +361,6 @@
             lucide.createIcons();
         });
 
-        // Scroll Reveal
         const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
         const revealOnScroll = () => {
             const windowHeight = window.innerHeight;
@@ -411,7 +400,6 @@
             aiButton.disabled = true;
 
             try {
-                // --- KATI USTA TALİMATLARI ---
                 const prompt = `Sen Antalya Ünal Yemek catering firmasının 30 yıllık tecrübeli baş aşçısısın.
                 
                 GÖREVİN: Müşterinin isteğine göre TEK BİR TANE (1 Adet) kusursuz menü oluşturmak.
@@ -419,21 +407,21 @@
                 Müşteri Bilgisi: ${eventType}, ${guestCount} kişi. Not: ${notes}.
 
                 ÖNEMLİ KURAL - BÜTÇE ANALİZİ:
-                Eğer müşteri notunda 'ekonomik', 'ucuz', 'uygun' kelimeleri geçerse (veya Düğün dahi olsa ekonomik istenirse):
-                - ASLA Kırmızı Et (Tas Kebabı, Kavurma, Köfte, Tandır) YAZMA.
-                - SADECE Tavuk Yemekleri (Tavuk Sote, Tavuk Döner, Fırın Tavuk) veya Bakliyat/Sebze (Kuru Fasulye) YAZ.
-                - Bu kural KESİNDİR. Düğün olsa bile 'ekonomik' denirse Tavuk ver.
+                Eğer müşteri notunda 'ekonomik', 'ucuz', 'uygun' kelimeleri geçerse (Düğün dahi olsa):
+                - Ana Yemek ASLA Kırmızı Et (Tas Kebabı, Kavurma, Köfte, Tandır) OLAMAZ.
+                - Ana Yemek SADECE Tavuk Yemekleri (Tavuk Sote, Tavuk Döner, Fırın Tavuk) veya Kuru Fasulye OLMALIDIR.
+                - Bu kural KESİNDİR.
 
                 ÖNEMLİ KURAL - ETKİNLİK:
                 - Eğer 'İftar' seçildiyse: Başlangıca MUTLAKA 'İftariyelik Tabağı (Hurma, Zeytin, Peynir)' ekle.
                 - Eğer 'Piknik' seçildiyse: Mangal ürünleri (Köfte/Tavuk/Sucuk) yaz.
 
                 GENEL KURALLAR:
-                1. SADECE 1 (BİR) menü oluştur.
-                2. Her kategoriye SADECE 1 (BİR) yemek yaz. 'Alternatif' falan yazma. Net ol.
-                3. Yemekler uyumlu olsun (Örn: Tavuk Sote yanına Pirinç Pilavı).
-                4. Giriş yazısında "Nişanınız, Sünnetiniz" deme. "Davetiniz" veya "Etkinliğiniz" de.
-                5. Çıktı SADECE aşağıdaki HTML kodu olsun. Düşünce balonları veya açıklama yazma.
+                1. SADECE 1 (BİR) menü oluştur. Alternatif falan istemiyorum.
+                2. Her kategoriye SADECE 1 (BİR) yemek yaz. 'Pilav (veya Makarna)' gibi şeyler yazma. Karar ver ve en iyisini yaz.
+                3. Yemekler uyumlu olsun (Örn: Tavuk Sote yanına Pirinç Pilavı, Kuru Fasulye yanına Pilav gibi).
+                4. Giriş yazısında "Nişanınız, Sünnetiniz" deme. "Değerli misafirimiz" de.
+                5. Çıktı SADECE aşağıdaki HTML kodu olsun. Başka hiçbir açıklama yazma.
 
                 ÇIKTI FORMATI:
                 <div class="p-4 bg-red-50 rounded-lg text-red-900 italic mb-4 border-l-4 border-red-700">
@@ -441,11 +429,11 @@
                 </div>
                 
                 <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 shadow-md">
-                    <h4 class="font-bold text-red-700 text-2xl mb-4 border-b border-red-100 pb-2 text-center">Ustanın Tavsiyesi</h4>
+                    <h4 class="font-bold text-red-700 text-2xl mb-4 border-b border-red-100 pb-2 text-center">Ustanın Altın Menüsü</h4>
                     <ul class="space-y-4 text-gray-800 text-lg">
                         <li class="flex justify-between items-center border-b border-gray-100 pb-2">
                             <span class="font-bold text-gray-900 w-1/3">Başlangıç / Çorba:</span> 
-                            <span class="w-2/3 text-right">...Tek Çorba İsmi...</span>
+                            <span class="w-2/3 text-right">...Tek Çorba İsmi (İftarsa İftariyelik)...</span>
                         </li>
                         <li class="flex justify-between items-center border-b border-gray-100 pb-2">
                             <span class="font-bold text-gray-900 w-1/3">Ana Yemek:</span> 
@@ -461,7 +449,7 @@
                         </li>
                     </ul>
                 </div>
-                <p class="text-xs text-gray-500 mt-4 text-center italic">Not: Fiyat teklifi ve detaylar için lütfen bizi arayınız.</p>`;
+                <p class="text-xs text-gray-500 mt-4 text-center italic">Not: Bu menü taslaktır, detaylar için bizi arayınız.</p>`;
 
                 const encodedPrompt = encodeURIComponent(prompt);
                 const response = await fetch(`https://text.pollinations.ai/${encodedPrompt}?model=openai`);
@@ -471,23 +459,21 @@
                 let generatedText = await response.text();
 
                 if (generatedText) {
-                    // --- TEMİZLİK ROBOTU (KESİN ÇÖZÜM) ---
-                    // Markdown temizliği
-                    generatedText = generatedText.replace(/```html/g, '').replace(/```/g, '');
-
-                    // Düşünce balonlarını (reasoning_content ve json artıkları) temizle
-                    // Mantık: HTML kodu her zaman <div class="p-4 ile başlar. Öncesini at.
+                    // --- KESİN TEMİZLİK KODU ---
+                    // 1. JSON artıklarını temizle (En baştan <div tagine kadar sil)
                     const startDiv = generatedText.indexOf('<div class="p-4');
-                    
                     if (startDiv !== -1) {
                         generatedText = generatedText.substring(startDiv);
                         
-                        // Son kısımdaki fazlalıkları at (eğer varsa)
+                        // 2. Sondaki fazlalıkları temizle (</p> taginden sonrasını sil)
                         const endP = generatedText.lastIndexOf('</p>') + 4;
                         if (endP > 0) {
                             generatedText = generatedText.substring(0, endP);
                         }
                     }
+                    
+                    // 3. Markdown temizliği (Eğer hala varsa)
+                    generatedText = generatedText.replace(/```html/g, '').replace(/```/g, '');
 
                     resultText.innerHTML = generatedText;
                     loadingState.classList.add('hidden');
