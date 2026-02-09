@@ -24,6 +24,7 @@
         html { scroll-behavior: smooth; }
         body.modal-open { overflow: hidden; }
 
+        /* Scroll Animasyonları */
         .reveal { opacity: 0; transform: translateY(50px); transition: all 1s ease-out; }
         .reveal-left { opacity: 0; transform: translateX(-50px); transition: all 1s ease-out; }
         .reveal-right { opacity: 0; transform: translateX(50px); transition: all 1s ease-out; }
@@ -298,7 +299,7 @@
     <script>
         lucide.createIcons();
 
-        // Navbar & Scroll
+        // Navbar & Scroll (DÜZELTİLEN KISIM: Yazılar Okunabilir Hale Getirildi)
         const navbar = document.getElementById('navbar');
         const navTitle = document.getElementById('nav-title');
         const navSubtitle = document.getElementById('nav-subtitle');
@@ -310,12 +311,16 @@
                 // Aşağı kayınca: Beyaz arka plan, KOYU yazı
                 navbar.classList.add('bg-white', 'shadow-md', 'py-2');
                 navbar.classList.remove('bg-transparent', 'py-3');
+                
                 navTitle.classList.remove('text-white');
                 navTitle.classList.add('text-gray-900');
+                
                 navSubtitle.classList.remove('text-gray-200');
                 navSubtitle.classList.add('text-red-700');
+                
                 menuToggle.classList.remove('text-white', 'border-white/20');
                 menuToggle.classList.add('text-gray-800', 'border-gray-200');
+                
                 document.querySelectorAll('.nav-link').forEach(link => {
                     link.classList.remove('text-white', 'shadow-black', 'drop-shadow-md');
                     link.classList.add('text-gray-700');
@@ -324,12 +329,16 @@
                 // En tepede: Şeffaf arka plan, BEYAZ yazı
                 navbar.classList.remove('bg-white', 'shadow-md', 'py-2');
                 navbar.classList.add('bg-transparent', 'py-3');
+                
                 navTitle.classList.add('text-white');
                 navTitle.classList.remove('text-gray-900');
+                
                 navSubtitle.classList.add('text-gray-200');
                 navSubtitle.classList.remove('text-red-700');
+                
                 menuToggle.classList.add('text-white', 'border-white/20');
                 menuToggle.classList.remove('text-gray-800', 'border-gray-200');
+                
                 document.querySelectorAll('.nav-link').forEach(link => {
                     link.classList.add('text-white', 'shadow-black', 'drop-shadow-md');
                     link.classList.remove('text-gray-700');
@@ -377,7 +386,7 @@
         window.addEventListener('scroll', revealOnScroll);
         revealOnScroll();
 
-        // --- POLLINATIONS AI (AKILLI VE TEMİZ MENÜ SİSTEMİ) ---
+        // --- POLLINATIONS AI (AKILLI MENÜ SİSTEMİ - AŞÇI MODU) ---
         async function generateMenuWithPollinations() {
             const eventType = document.getElementById('aiEventType').value;
             const guestCount = document.getElementById('aiGuestCount').value;
@@ -402,50 +411,51 @@
             aiButton.disabled = true;
 
             try {
-                // --- ÇOK SIKI KURALLAR (WHITELIST) ---
-                const prompt = `Sen Antalya Ünal Yemek catering firmasının 30 yıllık baş aşçısısın.
+                // --- SAMİMİ USTA PROMPT'U (Kısıtlama Yok, Yönlendirme Var) ---
+                const prompt = `Sen Antalya Ünal Yemek'in 30 yıllık emektar baş aşçısısın. 
+                Müşteri Bilgisi: ${eventType}, ${guestCount} kişi. Müşteri Notu: ${notes}.
                 
-                GÖREVİN: Aşağıdaki bilgilere göre 2 FARKLI MENÜ ALTERNATİFİ (Seçenek 1, Seçenek 2) oluştur.
+                GÖREVİN:
+                1. Önce müşteriye çok samimi, içten, esnaf ağzıyla "Hoş geldiniz" de. (Örn: "Hoş geldiniz ağam/ablam, sizin için en güzelinden şöyle bir şey düşündüm...")
+                2. Sonra bu etkinliğe ve notlara (ekonomik/lüks durumuna göre) en uygun, en lezzetli, birbirine en çok yakışan yemeklerden oluşan 2 FARKLI MENÜ SEÇENEĞİ sun.
+                3. Her yemeğin yanına parantez içinde mutlaka bir ALTERNATİF yaz. (Örn: "Et Kavurma (veya Çoban Kavurma)", "Pirinç Pilavı (veya Bulgur Pilavı)").
+                4. En sona da "Afiyet olsun, bekleriz" tarzı sıcak bir kapanış yaz.
                 
-                Müşteri: ${eventType}, ${guestCount} kişi. Not: ${notes}.
-
-                ÖNEMLİ KURALLAR:
-                1. SADECE AŞAĞIDAKİ YEMEK LİSTESİNDEN SEÇİM YAP. BAŞKA YEMEK YAZMA.
-                   - Çorbalar: Mercimek, Ezogelin, Yayla, Domates, Tarhana, Tavuk Suyu.
-                   - Ana Yemekler (Ekonomikse): Tavuk Sote, Tavuk Döner, Kuru Fasulye, Nohut, Türlü, Musakka, Karnıyarık.
-                   - Ana Yemekler (Lüksse): Et Kavurma, Tas Kebabı, Hünkarbeğendi, Kuzu Tandır, Rosto Köfte.
-                   - Yardımcılar: Pirinç Pilavı, Bulgur Pilavı, Makarna, Su Böreği.
-                   - Tatlı/İçecek: Baklava, Şekerpare, Sütlaç, Helva, Ayran, Cacık, Kola.
+                TEKNİK KURAL: 
+                - Cevabını SADECE HTML formatında ver. 
+                - Asla 'Here is the code' gibi İngilizce şeyler yazma.
                 
-                2. Menüler birbiriyle uyumlu olsun (Örn: Kuru fasulye yanına Pilav ve Cacık ver).
-                3. Yabancı kelime, uydurma yemek ismi, domuz eti, şarap ASLA kullanma.
-                4. Çıktı SADECE aşağıdaki HTML kodu olsun. Başka hiçbir yazı (düşünce, açıklama vb.) yazma.
-
-                ÇIKTI FORMATI:
+                İSTENEN HTML FORMATI:
+                <div class="p-4 bg-red-50 rounded-lg text-red-900 italic mb-4 border-l-4 border-red-700">
+                   ...Buraya samimi giriş yazısı gelecek...
+                </div>
+                
                 <div class="grid md:grid-cols-2 gap-6">
-                    <div class="bg-stone-50 p-5 rounded-lg border border-stone-200 shadow-sm hover:shadow-md transition-shadow">
-                        <h4 class="font-bold text-red-700 text-xl mb-4 border-b border-red-100 pb-2">Seçenek 1</h4>
+                    <div class="bg-stone-50 p-5 rounded-lg border border-stone-200 shadow-sm">
+                        <h4 class="font-bold text-red-700 text-xl mb-4 border-b border-red-100 pb-2">1. Seçenek (Ustanın Tavsiyesi)</h4>
                         <ul class="space-y-3 text-gray-700">
-                            <li><span class="font-bold block text-gray-900">Çorba:</span> ...Tek Çorba...</li>
-                            <li><span class="font-bold block text-gray-900">Ana Yemek:</span> ...Tek Ana Yemek...</li>
-                            <li><span class="font-bold block text-gray-900">Yardımcı:</span> ...Tek Yardımcı...</li>
-                            <li><span class="font-bold block text-gray-900">Tatlı/İçecek:</span> ...Tek Tatlı/İçecek...</li>
+                            <li><span class="font-bold block text-gray-900">Çorba:</span> ...Yemek İsmi... <span class="text-xs text-gray-500 block">(veya Alternatif)</span></li>
+                            <li><span class="font-bold block text-gray-900">Ana Yemek:</span> ...Yemek İsmi... <span class="text-xs text-gray-500 block">(veya Alternatif)</span></li>
+                            <li><span class="font-bold block text-gray-900">Yardımcı:</span> ...Yemek İsmi... <span class="text-xs text-gray-500 block">(veya Alternatif)</span></li>
+                            <li><span class="font-bold block text-gray-900">Tatlı/İçecek:</span> ...Yemek İsmi... <span class="text-xs text-gray-500 block">(veya Alternatif)</span></li>
                         </ul>
                     </div>
-                    <div class="bg-stone-50 p-5 rounded-lg border border-stone-200 shadow-sm hover:shadow-md transition-shadow">
-                        <h4 class="font-bold text-red-700 text-xl mb-4 border-b border-red-100 pb-2">Seçenek 2</h4>
+                    <div class="bg-stone-50 p-5 rounded-lg border border-stone-200 shadow-sm">
+                        <h4 class="font-bold text-red-700 text-xl mb-4 border-b border-red-100 pb-2">2. Seçenek (Alternatif Lezzet)</h4>
                         <ul class="space-y-3 text-gray-700">
-                            <li><span class="font-bold block text-gray-900">Çorba:</span> ...Tek Çorba...</li>
-                            <li><span class="font-bold block text-gray-900">Ana Yemek:</span> ...Tek Ana Yemek...</li>
-                            <li><span class="font-bold block text-gray-900">Yardımcı:</span> ...Tek Yardımcı...</li>
-                            <li><span class="font-bold block text-gray-900">Tatlı/İçecek:</span> ...Tek Tatlı/İçecek...</li>
+                            <li><span class="font-bold block text-gray-900">Çorba:</span> ...Yemek İsmi... <span class="text-xs text-gray-500 block">(veya Alternatif)</span></li>
+                            <li><span class="font-bold block text-gray-900">Ana Yemek:</span> ...Yemek İsmi... <span class="text-xs text-gray-500 block">(veya Alternatif)</span></li>
+                            <li><span class="font-bold block text-gray-900">Yardımcı:</span> ...Yemek İsmi... <span class="text-xs text-gray-500 block">(veya Alternatif)</span></li>
+                            <li><span class="font-bold block text-gray-900">Tatlı/İçecek:</span> ...Yemek İsmi... <span class="text-xs text-gray-500 block">(veya Alternatif)</span></li>
                         </ul>
                     </div>
                 </div>
-                <p class="text-xs text-gray-500 mt-4 text-center italic">Not: Fiyat teklifi için arayınız.</p>`;
+                
+                <div class="mt-4 text-center font-medium text-gray-600">
+                   ...Buraya samimi kapanış yazısı gelecek...
+                </div>`;
 
                 const encodedPrompt = encodeURIComponent(prompt);
-                // model=openai parametresi ekleyerek daha akıllı bir model istiyoruz
                 const response = await fetch(`https://text.pollinations.ai/${encodedPrompt}?model=openai`);
 
                 if (!response.ok) throw new Error('Sunucu hatası: ' + response.status);
@@ -454,27 +464,18 @@
 
                 if (generatedText) {
                     // --- TEMİZLİK ROBOTU ---
-                    // Yapay zeka bazen düşüncelerini yazar, onları temizleyelim.
-                    // Sadece <div class="grid... ile başlayan ve en sondaki </div> ile biten kısmı alalım.
-                    
-                    // 1. Markdown temizliği
+                    // Markdown temizliği
                     generatedText = generatedText.replace(/```html/g, '').replace(/```/g, '');
 
-                    // 2. Düşünce balonlarını temizle (JSON formatı gelirse)
-                    try {
-                        // Eğer çıktı JSON formatındaysa ve içinde "reasoning" varsa onu atla
-                        if (generatedText.trim().startsWith('{')) {
-                             // Basitçe HTML etiketini bulup gerisini atalım
-                             const startIndex = generatedText.indexOf('<div class="grid');
-                             if (startIndex !== -1) {
-                                 generatedText = generatedText.substring(startIndex);
-                                 // Sondaki fazlalıkları da temizleyelim (örneğin "} veya " biterse)
-                                 const endIndex = generatedText.lastIndexOf('</p>') + 4;
-                                 if (endIndex > -1) generatedText = generatedText.substring(0, endIndex);
-                             }
+                    // Düşünce balonlarını (reasoning_content) temizle
+                    const cleanStart = generatedText.indexOf('<div'); 
+                    if (cleanStart !== -1) {
+                        generatedText = generatedText.substring(cleanStart);
+                        // Sondaki fazlalıkları at (eğer JSON parantezi kalmışsa)
+                        const cleanEnd = generatedText.lastIndexOf('</div>') + 6;
+                        if (cleanEnd > cleanStart) {
+                             generatedText = generatedText.substring(0, cleanEnd);
                         }
-                    } catch (e) {
-                        console.log("JSON parse hatası yok, devam et.");
                     }
 
                     resultText.innerHTML = generatedText;
