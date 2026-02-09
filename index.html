@@ -194,11 +194,10 @@
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Etkinlik Türü</label>
                             <select id="aiEventType" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 outline-none">
-                                <option>Düğün Yemeği</option>
-                                <option>Mevlit / Cenaze</option>
-                                <option>Kurumsal / Ofis</option>
-                                <option>İftar Yemeği</option>
-                                <option>Piknik</option>
+                                <option value="Düğün / Mevlit / Cenaze">Düğün / Mevlit / Cenaze</option>
+                                <option value="İftar Yemeği">İftar Yemeği</option>
+                                <option value="Kurumsal / Ofis">Kurumsal / Ofis</option>
+                                <option value="Piknik / Açık Hava">Piknik / Açık Hava</option>
                             </select>
                         </div>
                         <div>
@@ -299,7 +298,7 @@
     <script>
         lucide.createIcons();
 
-        // Navbar & Scroll (DÜZELTİLEN KISIM)
+        // Navbar & Scroll (DÜZELTİLEN KISIM: Yazılar Okunabilir Hale Getirildi)
         const navbar = document.getElementById('navbar');
         const navTitle = document.getElementById('nav-title');
         const navSubtitle = document.getElementById('nav-subtitle');
@@ -308,25 +307,37 @@
 
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
-                // Aşağı kayınca: Beyaz arka plan, koyu yazı
+                // Aşağı kayınca: Beyaz arka plan, KOYU yazı
                 navbar.classList.add('bg-white', 'shadow-md', 'py-2');
                 navbar.classList.remove('bg-transparent', 'py-3');
-                navTitle.classList.replace('text-white', 'text-gray-900');
-                navSubtitle.classList.replace('text-gray-200', 'text-red-700');
-                menuToggle.classList.replace('text-white', 'text-gray-900');
-                menuToggle.classList.replace('border-white/20', 'border-gray-200');
+                
+                navTitle.classList.remove('text-white');
+                navTitle.classList.add('text-gray-900');
+                
+                navSubtitle.classList.remove('text-gray-200');
+                navSubtitle.classList.add('text-red-700');
+                
+                menuToggle.classList.remove('text-white', 'border-white/20');
+                menuToggle.classList.add('text-gray-800', 'border-gray-200');
+                
                 document.querySelectorAll('.nav-link').forEach(link => {
                     link.classList.remove('text-white', 'shadow-black', 'drop-shadow-md');
                     link.classList.add('text-gray-700');
                 });
             } else {
-                // En tepede: Şeffaf arka plan, beyaz yazı
+                // En tepede: Şeffaf arka plan, BEYAZ yazı
                 navbar.classList.remove('bg-white', 'shadow-md', 'py-2');
                 navbar.classList.add('bg-transparent', 'py-3');
-                navTitle.classList.replace('text-gray-900', 'text-white');
-                navSubtitle.classList.replace('text-red-700', 'text-gray-200');
-                menuToggle.classList.replace('text-gray-900', 'text-white');
-                menuToggle.classList.replace('border-gray-200', 'border-white/20');
+                
+                navTitle.classList.add('text-white');
+                navTitle.classList.remove('text-gray-900');
+                
+                navSubtitle.classList.add('text-gray-200');
+                navSubtitle.classList.remove('text-red-700');
+                
+                menuToggle.classList.add('text-white', 'border-white/20');
+                menuToggle.classList.remove('text-gray-800', 'border-gray-200');
+                
                 document.querySelectorAll('.nav-link').forEach(link => {
                     link.classList.add('text-white', 'shadow-black', 'drop-shadow-md');
                     link.classList.remove('text-gray-700');
@@ -342,12 +353,18 @@
                 menuToggle.innerHTML = '<i data-lucide="x" class="w-6 h-6"></i>';
                 navbar.classList.add('bg-white');
                 navbar.classList.remove('bg-transparent');
+                navTitle.classList.remove('text-white');
+                navTitle.classList.add('text-gray-900');
+                menuToggle.classList.remove('text-white');
+                menuToggle.classList.add('text-gray-900');
             } else {
                 mobileMenu.classList.add('hidden');
                 menuToggle.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
                 if (window.scrollY <= 50) {
                     navbar.classList.remove('bg-white');
                     navbar.classList.add('bg-transparent');
+                    navTitle.classList.add('text-white');
+                    menuToggle.classList.add('text-white');
                 }
             }
             lucide.createIcons();
@@ -368,7 +385,7 @@
         window.addEventListener('scroll', revealOnScroll);
         revealOnScroll();
 
-        // --- POLLINATIONS AI (2 ALTERNATİFLİ MENÜ) ---
+        // --- POLLINATIONS AI (AKILLI MENÜ SİSTEMİ) ---
         async function generateMenuWithPollinations() {
             const eventType = document.getElementById('aiEventType').value;
             const guestCount = document.getElementById('aiGuestCount').value;
@@ -393,43 +410,55 @@
             aiButton.disabled = true;
 
             try {
-                // GELİŞMİŞ PROMPT (2 MENÜ + TEK YEMEK KURALI)
-                const prompt = `Sen Antalya Ünal Yemek catering firmasının 30 yıllık baş aşçısısın. Müşteri isteğine göre 2 FARKLI MENÜ ALTERNATİFİ (Seçenek 1, Seçenek 2) oluştur.
+                // --- BURASI ÇOK ÖNEMLİ: ETKİNLİĞE GÖRE ZORLAŞTIRILMIŞ MENÜ KURALLARI ---
+                let instruction = "";
                 
-                Müşteri Bilgileri: 
-                - Etkinlik: ${eventType}
-                - Kişi: ${guestCount}
-                - Not: ${notes}
+                if (eventType.includes("Düğün") || eventType.includes("Mevlit") || eventType.includes("Cenaze")) {
+                    instruction = "BU BİR CEMİYET YEMEĞİDİR. SADECE KLASİK TÜRK YEMEKLERİ YAZ. Seçenek 1: Et Kavurma ve Pirinç Pilavı. Seçenek 2: Tavuk Sote ve Pirinç Pilavı. Yanına mutlaka Ayran veya Cacık ekle. Tatlı olarak Helva veya Baklava yaz. ASLA kebap, döner veya uydurma yemek yazma.";
+                } else if (eventType.includes("İftar")) {
+                    instruction = "BU BİR RAMAZAN İFTAR YEMEĞİDİR. Başlangıca MUTLAKA 'İftariyelik Tabağı (Hurma, Zeytin)' ve Çorba ekle. Ana yemek olarak Hünkarbeğendi, Tas Kebabı veya Kuzu Tandır gibi klasikler seç. Tatlı olarak Güllaç veya Kadayıf seç.";
+                } else if (eventType.includes("Piknik")) {
+                    instruction = "BU BİR PİKNİK MENÜSÜDÜR. Izgara Köfte, Tavuk Şiş, Sucuk Ekmek gibi mangal ürünleri seç. Yanına Piyaz ve Közlenmiş Biber ekle.";
+                } else {
+                    instruction = "BU BİR İŞ YERİ YEMEĞİDİR. Dengeli bir öğle yemeği menüsü hazırla. Örn: Sebzeli Kebap, Musakka, Karnıyarık.";
+                }
 
-                KURALLAR:
-                1. Her kategoride SADECE 1 (BİR) yemek ismi yaz. Asla liste yapma. (Örn: "Pilav, Makarna" DEME. Sadece "Tereyağlı Pirinç Pilavı" DE.)
-                2. Yemekler birbiriyle uyumlu olsun.
-                3. Uydurma isimler kullanma. Geleneksel Türk mutfağı isimleri kullan.
-                4. Asla domuz, alkol, şarap önerme.
+                // AI'YA GİDEN KESİN KOMUTLAR
+                const prompt = `Sen Antalya Ünal Yemek catering firmasının 30 yıllık baş aşçısısın.
                 
-                Çıktıyı SADECE HTML grid yapısında ver. Başka açıklama yazma:
+                GÖREVİN: ${instruction}
                 
+                Müşteri: ${eventType}, ${guestCount} kişi. Not: ${notes} (Eğer 'ekonomik' denirse asla pahalı et yazma, tavuk/bakliyat yaz).
+
+                KESİN KURALLAR:
+                1. SADECE 2 (İKİ) farklı menü seçeneği sun.
+                2. Her kategoriye SADECE 1 (BİR) yemek yaz. Asla liste yapma. 
+                3. Yemek isimleri %100 Türkçe ve Geleneksel olsun (Örn: "Kuşbaşılı Biber Dolması" YOK, "Etli Biber Dolması" VAR).
+                4. "Kufta", "Gravy" gibi yabancı kelimeler YASAK.
+                5. İçki YASAK. Sadece Ayran, Şalgam, Kola vb.
+
+                ÇIKTI FORMATI (SADECE BUNU VER):
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="bg-stone-50 p-5 rounded-lg border border-stone-200 shadow-sm hover:shadow-md transition-shadow">
                         <h4 class="font-bold text-red-700 text-xl mb-4 border-b border-red-100 pb-2">Seçenek 1</h4>
                         <ul class="space-y-3 text-gray-700">
-                            <li><span class="font-bold block text-gray-900">Çorba:</span> ...Tek Çorba İsmi...</li>
+                            <li><span class="font-bold block text-gray-900">Çorba:</span> ...Tek Çorba...</li>
                             <li><span class="font-bold block text-gray-900">Ana Yemek:</span> ...Tek Ana Yemek...</li>
-                            <li><span class="font-bold block text-gray-900">Yardımcı:</span> ...Tek Yardımcı...</li>
-                            <li><span class="font-bold block text-gray-900">Tatlı/İçecek:</span> ...Tek Tatlı...</li>
+                            <li><span class="font-bold block text-gray-900">Yardımcı:</span> ...Pilav/Makarna...</li>
+                            <li><span class="font-bold block text-gray-900">Tatlı/İçecek:</span> ...Tatlı ve İçecek...</li>
                         </ul>
                     </div>
                     <div class="bg-stone-50 p-5 rounded-lg border border-stone-200 shadow-sm hover:shadow-md transition-shadow">
                         <h4 class="font-bold text-red-700 text-xl mb-4 border-b border-red-100 pb-2">Seçenek 2</h4>
                         <ul class="space-y-3 text-gray-700">
-                            <li><span class="font-bold block text-gray-900">Çorba:</span> ...Tek Çorba İsmi...</li>
+                            <li><span class="font-bold block text-gray-900">Çorba:</span> ...Tek Çorba...</li>
                             <li><span class="font-bold block text-gray-900">Ana Yemek:</span> ...Tek Ana Yemek...</li>
-                            <li><span class="font-bold block text-gray-900">Yardımcı:</span> ...Tek Yardımcı...</li>
-                            <li><span class="font-bold block text-gray-900">Tatlı/İçecek:</span> ...Tek Tatlı...</li>
+                            <li><span class="font-bold block text-gray-900">Yardımcı:</span> ...Pilav/Makarna...</li>
+                            <li><span class="font-bold block text-gray-900">Tatlı/İçecek:</span> ...Tatlı ve İçecek...</li>
                         </ul>
                     </div>
                 </div>
-                <p class="text-xs text-gray-500 mt-4 text-center italic">Not: Menüler mevsim şartlarına göre değişiklik gösterebilir. Fiyat teklifi için arayınız.</p>`;
+                <p class="text-xs text-gray-500 mt-4 text-center italic">Not: Menüler mevsim şartlarına göre değişebilir. Fiyat için arayınız.</p>`;
 
                 const encodedPrompt = encodeURIComponent(prompt);
                 const response = await fetch(`https://text.pollinations.ai/${encodedPrompt}`);
