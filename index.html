@@ -97,7 +97,6 @@
         </div>
     </nav>
 
-    <!-- Hero -->
     <section id="hero" class="relative h-screen min-h-[600px] flex items-center">
         <div class="absolute inset-0 z-0">
             <img src="https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=2070&auto=format&fit=crop" alt="Türk Mutfağı" class="w-full h-full object-cover">
@@ -194,14 +193,20 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-col lg:flex-row items-stretch gap-12">
                 <div class="w-full lg:w-1/2 reveal-left">
-                    <div class="inline-flex items-center gap-2 bg-red-100 text-red-800 px-4 py-1 rounded-full text-sm font-bold mb-4"><i data-lucide="sparkles" class="w-4 h-4"></i> Yapay Zeka Destekli</div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 font-serif">Size Özel Tek ve Mükemmel Menü</h2>
-                    <p class="text-gray-600 mb-8">Bütçenizi ve isteğinizi yazın, etkinliğinize en uygun "Altın Menüyü" oluşturalım.</p>
-                    
+                    <div class="inline-flex items-center gap-2 bg-red-100 text-red-800 px-4 py-1 rounded-full text-sm font-bold mb-4">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i> Yapay Zeka Destekli
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 font-serif">
+                        Size Özel Tek ve Mükemmel Menü
+                    </h2>
+                    <p class="text-gray-600 mb-8 text-lg">
+                        Bütçenizi ve isteğinizi yazın, etkinliğinize en uygun "Altın Menüyü" oluşturalım.
+                    </p>
+
                     <div class="bg-white p-6 rounded-xl shadow-lg border border-red-100 space-y-4">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Etkinlik Türü</label>
-                            <select id="aiEventType" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 outline-none">
+                            <select id="aiEventType" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 outline-none bg-stone-50">
                                 <option value="Düğün Yemeği">Düğün Yemeği</option>
                                 <option value="Mevlit / Cenaze">Mevlit / Cenaze</option>
                                 <option value="Kurumsal / Ofis">Kurumsal / Ofis</option>
@@ -209,16 +214,22 @@
                                 <option value="Piknik / Açık Hava">Piknik / Açık Hava</option>
                             </select>
                         </div>
+
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Kişi Sayısı</label>
-                            <input type="number" id="aiGuestCount" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 outline-none" placeholder="Örn: 250">
+                            <input type="number" id="aiGuestCount" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 outline-none bg-stone-50" placeholder="Örn: 250">
                         </div>
+
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Notlar / Bütçe Durumu</label>
-                            <textarea id="aiNotes" rows="2" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 outline-none" placeholder="Örn: Ekonomik olsun, tavuklu olsun..."></textarea>
+                            <textarea id="aiNotes" rows="2" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 outline-none bg-stone-50" placeholder="Örn: Ekonomik olsun, tavuklu olsun..."></textarea>
                         </div>
+
                         <div id="aiError" class="hidden text-red-600 text-sm bg-red-50 p-2 rounded flex items-center gap-2"></div>
-                        <button id="aiButton" onclick="generateMenuWithPollinations()" class="w-full bg-gradient-to-r from-red-700 to-red-600 text-white font-bold py-4 rounded-lg hover:from-red-800 transition-all shadow-md flex items-center justify-center gap-2"><i data-lucide="sparkles" class="w-5 h-5"></i> Mükemmel Menüyü Oluştur!</button>
+
+                        <button id="aiButton" onclick="generateMenuWithPollinations()" class="w-full bg-gradient-to-r from-red-700 to-red-600 text-white font-bold py-4 rounded-lg hover:from-red-800 transition-all shadow-md flex items-center justify-center gap-2">
+                            <i data-lucide="sparkles" class="w-5 h-5"></i> Mükemmel Menüyü Oluştur!
+                        </button>
                     </div>
                 </div>
 
@@ -226,9 +237,11 @@
                     <div class="relative w-full min-h-[400px] flex items-center justify-center">
                         <div class="absolute inset-0 bg-stone-900 rounded-2xl transform lg:rotate-2 opacity-10"></div>
                         <div class="absolute inset-0 bg-white rounded-2xl shadow-xl border border-gray-100 transform lg:-rotate-1 flex flex-col p-6 md:p-8 w-full h-full">
+                            
                             <div class="flex items-center justify-center mb-6 shrink-0">
                                 <img src="logo.jpg" class="w-16 h-16 object-contain bg-white rounded-full p-1 shadow-md">
                             </div>
+                            
                             <div class="flex-grow overflow-y-auto w-full">
                                 <div id="aiDefaultState" class="flex flex-col items-center justify-center text-center h-full text-gray-400">
                                     <i data-lucide="utensils" class="w-12 h-12 mb-4 text-red-100"></i>
@@ -242,11 +255,13 @@
                                     <div id="aiResultText" class="w-full"></div>
                                 </div>
                             </div>
+
                             <div class="pt-4 border-t border-dashed border-gray-300 mt-auto shrink-0">
                                 <button onclick="document.getElementById('contact').scrollIntoView()" class="w-full bg-stone-800 text-white py-3 rounded-lg text-sm font-bold hover:bg-black transition-colors">
                                     Bu Menü İçin Fiyat Alın
                                 </button>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -258,11 +273,13 @@
     <section id="menu" class="py-20 bg-stone-900 text-white relative overflow-hidden">
         <div class="container mx-auto px-4 relative z-10">
             <div class="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-gray-700 pb-6 reveal">
-                <div><h3 class="text-red-500 font-bold uppercase tracking-wide mb-2">Mutfağımızdan</h3><h2 class="text-3xl md:text-5xl font-bold font-serif">Geleneksel Lezzetlerimiz</h2></div>
+                <div>
+                    <h3 class="text-red-500 font-bold uppercase tracking-wide mb-2">Mutfağımızdan</h3>
+                    <h2 class="text-3xl md:text-5xl font-bold font-serif">Geleneksel Lezzetlerimiz</h2>
+                </div>
                 <p class="md:w-1/3 text-gray-400 text-right italic">"Antalya'nın geleneksel tatlarını modern sunumla buluşturuyoruz."</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Kart 1: Ana Yemekler (Güncellendi) -->
                 <div class="bg-stone-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all reveal">
                     <img src="4-tavuk-menu-unalyemek.jpg" alt="Tavuklu Pilav" class="w-full h-56 object-cover">
                     <div class="p-5">
@@ -271,7 +288,6 @@
                     </div>
                 </div>
 
-                <!-- Kart 2: Tatlılar (Güncellendi) -->
                 <div class="bg-stone-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all reveal">
                     <img src="sambali-unalyemek.jpg" alt="Tatlılar" class="w-full h-56 object-cover">
                     <div class="p-6">
@@ -280,7 +296,6 @@
                     </div>
                 </div>
 
-                <!-- Kart 3: Organizasyon (Güncellendi) -->
                 <div class="bg-stone-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all reveal">
                     <img src="organizasyon2-unalyemek.jpg" alt="Organizasyon" class="w-full h-56 object-cover">
                     <div class="p-5">
@@ -292,35 +307,99 @@
         </div>
     </section>
 
-    <!-- İletişim -->
+    <!-- İletişim (GÜNCELLENDİ) -->
     <section id="contact" class="py-20 bg-stone-100">
         <div class="container mx-auto px-4">
             <div class="grid lg:grid-cols-5 gap-8">
                 <div class="lg:col-span-3 bg-white p-8 rounded-2xl shadow-sm reveal-left">
                     <h3 class="text-2xl font-bold mb-6 text-gray-800">Bize Ulaşın</h3>
-                    <form class="space-y-4" onsubmit="event.preventDefault(); alert('Mesajınız alındı!');">
+                    <form class="space-y-4" onsubmit="event.preventDefault(); alert('Mesajınız alınmıştır! Size en kısa sürede dönüş yapacağız.');">
                         <div class="grid md:grid-cols-2 gap-4">
-                            <input type="text" class="w-full p-3 border rounded-lg" placeholder="Adınız Soyadınız" required>
-                            <input type="tel" class="w-full p-3 border rounded-lg" placeholder="Telefon" required>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Adınız Soyadınız</label>
+                                <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all" placeholder="Örn: Ahmet Yılmaz" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Telefon Numaranız</label>
+                                <input type="tel" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all" placeholder="05XX XXX XX XX" required>
+                            </div>
                         </div>
-                        <textarea rows="4" class="w-full p-3 border rounded-lg" placeholder="Mesajınız..."></textarea>
-                        <button class="w-full bg-gray-900 text-white font-bold py-4 rounded-lg hover:bg-gray-800 transition-colors">Gönder</button>
+                        
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Organizasyon Türü</label>
+                                <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none bg-white text-gray-700">
+                                    <option value="" disabled selected>Seçiniz</option>
+                                    <option value="Düğün / Nişan">Düğün / Nişan</option>
+                                    <option value="Mevlit / Cenaze">Mevlit / Cenaze</option>
+                                    <option value="Kurumsal / İş Yeri">Kurumsal / İş Yeri</option>
+                                    <option value="İftar Yemeği">İftar Yemeği</option>
+                                    <option value="Piknik / Açık Hava">Piknik / Açık Hava</option>
+                                    <option value="Diğer">Diğer</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Kişi Sayısı</label>
+                                <input type="number" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all" placeholder="Örn: 100" min="1">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Mesajınız / Özel İstekleriniz</label>
+                            <textarea rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all" placeholder="Tarih, menü tercihi vb. detaylar..."></textarea>
+                        </div>
+
+                        <button class="w-full bg-gray-900 text-white font-bold py-4 rounded-lg hover:bg-gray-800 transition-colors text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                            Teklif Al / Gönder
+                        </button>
                     </form>
                 </div>
+
                 <div class="lg:col-span-2 space-y-6 reveal-right">
                     <div class="bg-white p-8 rounded-2xl shadow-sm">
                         <h3 class="text-xl font-bold mb-6 text-gray-800">İletişim Bilgileri</h3>
                         <div class="space-y-4">
-                            <div class="flex items-start gap-4"><div class="w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center text-red-700"><i data-lucide="map-pin"></i></div><div><h5 class="font-bold">Adres</h5><p class="text-sm">Altınova Sinan Mah. Şelale Sk No:54, Kepez</p></div></div>
-                            <div class="flex items-start gap-4"><div class="w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center text-red-700"><i data-lucide="phone"></i></div><div><h5 class="font-bold">Telefon</h5><a href="tel:+902423414041">+90 242 341 40 41</a></div></div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center text-red-700 flex-shrink-0">
+                                    <i data-lucide="map-pin" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-gray-900">Adres</h5>
+                                    <p class="text-gray-600 text-sm">Altınova Sinan Mah. Şelale Sk No:54<br>Kepez / ANTALYA</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center text-red-700 flex-shrink-0">
+                                    <i data-lucide="phone" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-gray-900">Telefon</h5>
+                                    <a href="tel:+902423414041" class="text-gray-600 hover:text-red-700 transition-colors block">+90 242 341 40 41</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center text-red-700 flex-shrink-0">
+                                    <i data-lucide="mail" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-gray-900">E-Posta</h5>
+                                    <a href="mailto:unalyemek@gmail.com" class="text-gray-600 hover:text-red-700 transition-colors block break-all">unalyemek@gmail.com</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mt-8 flex gap-4">
-                            <a href="https://www.facebook.com/p/%C3%9CNAL-YEMEK-A%C5%9E-100070256532587/" class="w-12 h-12 bg-blue-600 text-white rounded-lg flex items-center justify-center"><i data-lucide="facebook"></i></a>
-                            <a href="https://www.instagram.com/unalyemek/" class="w-12 h-12 bg-purple-600 text-white rounded-lg flex items-center justify-center"><i data-lucide="instagram"></i></a>
+
+                        <div class="mt-8 pt-6 border-t border-gray-100">
+                            <h5 class="font-bold text-gray-900 mb-4">Sosyal Medya</h5>
+                            <div class="flex gap-4">
+                                <a href="https://www.facebook.com/p/%C3%9CNAL-YEMEK-A%C5%9E-100070256532587/" target="_blank" class="w-12 h-12 bg-blue-600 text-white rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors">
+                                    <i data-lucide="facebook" class="w-6 h-6"></i>
+                                </a>
+                                <a href="https://www.instagram.com/unalyemek/" target="_blank" class="w-12 h-12 bg-purple-600 text-white rounded-lg flex items-center justify-center"><i data-lucide="instagram"></i></a>
+                            </div>
                         </div>
                     </div>
                     <div class="bg-gray-200 h-64 rounded-2xl overflow-hidden relative">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3190.237270921471!2d30.7628!3d36.9312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c39aaed8630001%3A0x633519398414441e!2sAlt%C4%B1nova%20Sinan%2C%20%C5%9Eelale%20Sk.%20No%3A54%2C%2007260%20Kepez%2FAntalya!5e0!3m2!1str!2str!4v1698765432100!5m2!1str!2str" width="100%" height="100%" style="border:0" allowfullscreen="" loading="lazy"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3190.237270921471!2d30.7628!3d36.9312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c39aaed8630001%3A0x633519398414441e!2sAlt%C4%B1nova%20Sinan%2C%20%C5%9Eelale%20Sk.%20No%3A54%2C%2007260%20Kepez%2FAntalya!5e0!3m2!1str!2str!4v1698765432100!5m2!1str!2str" width="100%" height="100%" style="border:0" allowfullscreen="" loading="lazy" class="absolute inset-0 w-full h-full"></iframe>
                     </div>
                 </div>
             </div>
