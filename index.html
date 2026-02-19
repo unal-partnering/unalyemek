@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Ünal Yemek - Antalya Catering</title>
+    <meta name="description" content="Ünal Yemek olarak Kepez başta olmak üzere tüm Antalya ilçelerinde; düğün yemeği, mevlit yemeği, toplu yemek ve kurumsal catering hizmetleri sağlıyoruz. Antalya yemek şirketleri ve firmaları arasında 26 yıllık tecrübemizle yanınızdayız.">
+    <meta name="keywords" content="ünal yemek, kepez catering, antalya toplu yemek, kepez toplu yemek, kepez mevlit yemeği, antalya yemek şirketleri, antalya yemek firmaları, antalya düğün yemeği, kepez düğün yemeği, kepez mevlit yemeği firmaları">
     
     <link rel="icon" href="logo.jpg" type="image/jpeg">
 
@@ -43,7 +46,6 @@
 </head>
 <body class="bg-stone-50 text-gray-800 selection:bg-red-600 selection:text-white">
 
-    <!-- Resim Modalı -->
     <div id="imageModal" class="fixed inset-0 z-[100] bg-black/95 hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300 backdrop-blur-sm">
         <button id="closeModal" class="absolute top-6 right-6 text-white/80 hover:text-white hover:bg-white/10 rounded-full p-2 transition-all z-10">
             <i data-lucide="x" class="w-10 h-10"></i>
@@ -51,14 +53,12 @@
         <img id="modalImage" src="" alt="Tam Ekran" class="max-w-full max-h-[90vh] object-contain rounded shadow-2xl scale-95 transition-transform duration-300 select-none">
     </div>
 
-    <!-- Mobil Arama Butonu -->
     <div class="fixed bottom-4 right-4 z-50 md:hidden">
         <a href="tel:+902423414041" class="flex items-center justify-center w-14 h-14 bg-green-700 text-white rounded-full shadow-lg hover:bg-green-800 transition-colors animate-bounce-slow">
             <i data-lucide="phone" class="w-6 h-6"></i>
         </a>
     </div>
 
-    <!-- Navbar -->
     <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-3 bg-transparent text-white">
         <div class="container mx-auto px-4 flex justify-between items-center">
             <div class="flex items-center gap-2 md:gap-3 cursor-pointer" onclick="document.getElementById('hero').scrollIntoView()">
@@ -117,7 +117,6 @@
         </div>
     </section>
 
-    <!-- İstatistikler -->
     <div class="bg-white py-10 shadow-lg relative z-20 -mt-2 mx-4 md:mx-auto max-w-6xl rounded-xl reveal">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 px-6 text-center divide-x divide-gray-100">
             <div class="flex flex-col items-center"><span class="text-3xl font-bold text-red-700 block mb-1">26+</span><span class="text-gray-600 text-sm font-medium">Yıllık Tecrübe</span></div>
@@ -127,7 +126,6 @@
         </div>
     </div>
 
-    <!-- Hakkımızda -->
     <section id="about" class="py-20 bg-stone-50">
         <div class="container mx-auto px-4">
             <div class="flex flex-col lg:flex-row items-start gap-12">
@@ -144,7 +142,9 @@
                 <div class="w-full lg:w-1/2 pt-4 reveal-right">
                     <h3 class="text-red-700 font-bold uppercase tracking-wide mb-2">Hakkımızda</h3>
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 font-serif">Aile Sıcaklığı, Kurumsal Güvence</h2>
-                    <p class="text-gray-600 leading-relaxed mb-6">1998 yılında <strong>Şakir Ünal</strong> önderliğinde Antalya'da başladığımız lezzet yolculuğuna, bugün şehrin en güvenilir catering markası olarak devam ediyoruz. Fabrikasyon değil, anne eli değmiş lezzetler sunuyoruz. Sadece karın doyurmak için değil, insanları lezzetli sofralarda bir araya getirmek için çalışıyoruz.</p>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Hikayemiz, 1998 yılında <strong>Şakir Ünal</strong>'ın Antalya Kepez'de attığı ilk adımlarla başladı. Çeyrek asrı aşkın süredir, 'ev yapımı lezzet' prensibinden ödün vermeden on binlerce sofraya misafir olduk. Kurucumuz Şakir Ünal'dan devraldığımız bu eşsiz lezzet mirası ve esnaflık kültürü, bugün <strong>Hakan Ünal</strong>'ın vizyoner liderliğinde daha da büyüyerek devam ediyor. Kepez başta olmak üzere tüm Antalya'da, geçmişin tecrübesini bugünün modern standartlarıyla birleştiriyoruz.
+                    </p>
                     <ul class="space-y-4 mb-8">
                         <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-green-600 w-5 h-5"></i><span>Yüksek Kapasite: Büyük organizasyonlar için tam donanımlı mutfak</span></li>
                         <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-green-600 w-5 h-5"></i><span>Geleneksel Lezzetler: Türk mutfağının en sevilen ev yemekleri</span></li>
@@ -155,7 +155,6 @@
         </div>
     </section>
 
-    <!-- Hizmetler -->
     <section id="services" class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center max-w-3xl mx-auto mb-16 reveal">
@@ -188,7 +187,6 @@
         </div>
     </section>
 
-    <!-- AI Planlayıcı -->
     <section id="ai-planner" class="py-20 bg-gradient-to-br from-red-50 to-white border-y border-red-100">
         <div class="container mx-auto px-4">
             <div class="flex flex-col lg:flex-row items-stretch gap-12">
@@ -269,7 +267,6 @@
         </div>
     </section>
 
-    <!-- Menü (Lezzetler) -->
     <section id="menu" class="py-20 bg-stone-900 text-white relative overflow-hidden">
         <div class="container mx-auto px-4 relative z-10">
             <div class="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-gray-700 pb-6 reveal">
@@ -307,7 +304,6 @@
         </div>
     </section>
 
-    <!-- İletişim (GÜNCELLENDİ) -->
     <section id="contact" class="py-20 bg-stone-100">
         <div class="container mx-auto px-4">
             <div class="grid lg:grid-cols-5 gap-8">
