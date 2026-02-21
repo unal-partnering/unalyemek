@@ -28,7 +28,6 @@
         html { scroll-behavior: smooth; }
         body.modal-open { overflow: hidden; }
 
-        /* Scroll Animasyonları */
         .reveal { opacity: 0; transform: translateY(50px); transition: all 1s ease-out; }
         .reveal-left { opacity: 0; transform: translateX(-50px); transition: all 1s ease-out; }
         .reveal-right { opacity: 0; transform: translateX(50px); transition: all 1s ease-out; }
@@ -396,7 +395,7 @@
                         </div>
                     </div>
                     <div class="bg-gray-200 h-64 rounded-2xl overflow-hidden relative">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3190.237270921471!2d30.7628!3d36.9312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c39aaed8630001%3A0x633519398414441e!2sAlt%C4%B1nova%20Sinan%2C%20%C5%9Eelale%20Sk.%20No%3A54%2C%2007260%20Kepez%2FAntalya!5e0!3m2!1str!2str!4v1698765432100!5m2!1str!2str" width="100%" height="100%" style="border:0" allowfullscreen="" loading="lazy" class="absolute inset-0 w-full h-full"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3189.914238510864!2d30.7383794!3d36.9163773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c391787d555555%3A0xc49b71f92e92c2a4!2zw5xuYWwgWWVtZWs!5e0!3m2!1str!2str!4v1700000000000!5m2!1str!2str" width="100%" height="100%" style="border:0" allowfullscreen="" loading="lazy" class="absolute inset-0 w-full h-full"></iframe>
                     </div>
                 </div>
             </div>
@@ -410,7 +409,6 @@
     <script>
         lucide.createIcons();
 
-        // Navbar & Scroll
         const navbar = document.getElementById('navbar');
         const navTitle = document.getElementById('nav-title');
         const navSubtitle = document.getElementById('nav-subtitle');
@@ -472,7 +470,6 @@
             lucide.createIcons();
         });
 
-        // Scroll Reveal
         const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
         const revealOnScroll = () => {
             const windowHeight = window.innerHeight;
@@ -487,7 +484,7 @@
         window.addEventListener('scroll', revealOnScroll);
         revealOnScroll();
 
-        // --- AI PLANNER (PUTER.JS + LLAMA) ---
+        // --- AI PLANNER (PUTER.JS + LLAMA 3) ---
         async function generateMenuWithPollinations() {
             const eventType = document.getElementById('aiEventType').value;
             const guestCount = document.getElementById('aiGuestCount').value;
@@ -512,43 +509,30 @@
             aiButton.disabled = true;
 
             try {
-                let budgetRule = "Müşteri ne isterse ona uygun öner.";
-                const noteLower = notes.toLowerCase();
-                if (noteLower.includes("et olmasın") || noteLower.includes("etsiz") || noteLower.includes("vejetaryen") || noteLower.includes("vegan") || noteLower.includes("ekonomik")) {
-                    budgetRule = "YASAK: Kırmızı Et, Tavuk, Kıyma, Köfte, Balık, Sucuk ASLA KULLANMA. Sadece Bakliyat, Sebze, Pilav, Makarna kullan.";
-                }
+                const prompt = `Sen Antalya Ünal Yemek catering firmasının 30 yıllık tecrübeli baş aşçısısın. Müşteri: ${eventType}, ${guestCount} kişi. Not: ${notes}. GÖREVİN: Tek bir adet mükemmel menü oluşturmak. Kural: Sadece ve sadece şu formatta cevap ver: Mesaj | Başlık | Çorba | Ana Yemek | Yardımcı | Tatlı/İçecek`;
 
-                let eventGuide = "Klasik Türk yemekleri seç.";
-                if (eventType.includes("İftar")) eventGuide = "İftar için: Başlangıç 'Hurma & İftariyelik & Çorba' OLSUN.";
-                if (eventType.includes("Düğün") || eventType.includes("Mevlit")) eventGuide = "Düğün/Mevlit için: İçecek ASLA ÇAY/KAHVE OLAMAZ. Sadece Ayran/Meşrubat.";
-
-                const prompt = `Sen Antalya Ünal Yemek catering firmasının 30 yıllık tecrübeli baş aşçısısın. Müşteri: ${eventType}, ${guestCount} kişi. Not: ${notes}. GÖREVİN: Tek bir (1) adet mükemmel menü oluşturmak. KESİN KURALLAR: 1. ${budgetRule} 2. ${eventGuide} 3. Çorba olarak ASLA 'Yeşil Mercimek' yazma. 4. Salata yazma. 5. Sadece ve sadece şu formatta cevap ver (Aralara | koy): Mesaj | Başlık | Çorba | Ana Yemek | Yardımcı | Tatlı/İçecek`;
-
-                // Puter.js kullanarak Llama üzerinden menü oluşturma
+                // Puter.js chat motoru çağrısı
                 const response = await puter.ai.chat(prompt, {model: 'llama3'});
-                let generatedText = response.toString();
+                const generatedText = response.toString();
 
                 if (generatedText) {
                     const parts = generatedText.split('|');
-                    
-                    const mesaj = parts[0] ? parts[0].trim() : "Size özel menümüz hazır.";
-                    const baslik = parts[1] ? parts[1].trim() : "Ustanın Tavsiyesi";
+                    const mesaj = parts[0] ? parts[0].trim() : "Menümüz hazır.";
+                    const baslik = parts[1] ? parts[1].trim() : "Ustanın Altın Menüsü";
                     const corba = parts[2] ? parts[2].trim() : "Günün Çorbası";
                     const anaYemek = parts[3] ? parts[3].trim() : "Günün Ana Yemeği";
                     const yardimci = parts[4] ? parts[4].trim() : "Pirinç Pilavı";
                     const tatli = parts[5] ? parts[5].trim() : "Mevsim Meyvesi";
 
                     const htmlOutput = `
-                        <div class="p-4 bg-red-50 rounded-lg text-red-900 italic mb-4 border-l-4 border-red-700">
-                            "${mesaj}"
-                        </div>
+                        <div class="p-4 bg-red-50 rounded-lg text-red-900 italic mb-4 border-l-4 border-red-700">"${mesaj}"</div>
                         <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 shadow-md">
                             <h4 class="font-bold text-red-700 text-2xl mb-4 border-b border-red-100 pb-2 text-center">${baslik}</h4>
                             <ul class="space-y-4 text-gray-800 text-lg">
-                                <li class="flex justify-between items-center border-b border-gray-100 pb-2"><span class="font-bold text-gray-900">Çorba:</span> <span class="text-right">${corba}</span></li>
-                                <li class="flex justify-between items-center border-b border-gray-100 pb-2"><span class="font-bold text-gray-900">Ana Yemek:</span> <span class="text-right">${anaYemek}</span></li>
-                                <li class="flex justify-between items-center border-b border-gray-100 pb-2"><span class="font-bold text-gray-900">Yardımcı:</span> <span class="text-right">${yardimci}</span></li>
-                                <li class="flex justify-between items-center"><span class="font-bold text-gray-900">Tatlı/İçecek:</span> <span class="text-right">${tatli}</span></li>
+                                <li class="flex justify-between items-center border-b border-gray-100 pb-2"><strong>Çorba:</strong> <span>${corba}</span></li>
+                                <li class="flex justify-between items-center border-b border-gray-100 pb-2"><strong>Ana Yemek:</strong> <span>${anaYemek}</span></li>
+                                <li class="flex justify-between items-center border-b border-gray-100 pb-2"><strong>Yardımcı:</strong> <span>${yardimci}</span></li>
+                                <li class="flex justify-between items-center"><strong>İçecek/Tatlı:</strong> <span>${tatli}</span></li>
                             </ul>
                         </div>`;
 
@@ -557,8 +541,8 @@
                     resultState.classList.remove('hidden');
                 }
             } catch (error) {
-                console.error(error);
-                errorDiv.innerText = "Şu an bağlantı sağlanamıyor, lütfen birazdan tekrar deneyin.";
+                console.error("Hata Detayı:", error);
+                errorDiv.innerText = "Yapay zeka şu an meşgul. Lütfen butona tekrar basıp pop-up onayını kontrol edin.";
                 errorDiv.classList.remove('hidden');
                 loadingState.classList.add('hidden');
             } finally {
