@@ -311,18 +311,18 @@
                         <div class="grid md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Adınız Soyadınız</label>
-                                <input type="text" id="formName" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all" placeholder="Örn: Ahmet Yılmaz" required>
+                                <input type="text" id="formName" name="Müşteri Adı" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all" placeholder="Örn: Ahmet Yılmaz" required>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Telefon Numaranız</label>
-                                <input type="tel" id="formPhone" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all" placeholder="05XX XXX XX XX" required>
+                                <input type="tel" id="formPhone" name="Telefon" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all" placeholder="05XX XXX XX XX" required>
                             </div>
                         </div>
                         
                         <div class="grid md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Organizasyon Türü</label>
-                                <select id="formType" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none bg-white text-gray-700">
+                                <select id="formType" name="Organizasyon Türü" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none bg-white text-gray-700">
                                     <option value="" disabled selected>Seçiniz</option>
                                     <option value="Düğün Yemeği">Düğün Yemeği</option>
                                     <option value="Mevlit Yemeği">Mevlit Yemeği</option>
@@ -334,16 +334,16 @@
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Kişi Sayısı</label>
-                                <input type="number" id="formCount" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all" placeholder="Örn: 100" min="1">
+                                <input type="number" id="formCount" name="Kişi Sayısı" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all" placeholder="Örn: 100" min="1">
                             </div>
                         </div>
 
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Mesajınız / Özel İstekleriniz</label>
-                            <textarea id="formMessage" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all" placeholder="Tarih, menü tercihi vb. detaylar..."></textarea>
+                            <textarea id="formMessage" name="Mesaj" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all" placeholder="Tarih, menü tercihi vb. detaylar..."></textarea>
                         </div>
 
-                        <button type="button" onclick="sendMailTo()" class="w-full bg-gray-900 text-white font-bold py-4 rounded-lg hover:bg-gray-800 transition-colors text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                        <button type="button" id="formBtn" onclick="sendFormWithFormSubmit()" class="w-full bg-gray-900 text-white font-bold py-4 rounded-lg hover:bg-gray-800 transition-colors text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                             Teklif Al / Gönder
                         </button>
                     </form>
@@ -484,7 +484,7 @@
         window.addEventListener('scroll', revealOnScroll);
         revealOnScroll();
 
-        // İletişim Formu E-Posta Gönderme Fonksiyonu (Şimdilik Mailto)
+        // İletişim Formu E-Posta Gönderme Fonksiyonu (Eski yöntem yedek olarak bırakıldı)
         function sendMailTo() {
             const ad = document.getElementById('formName').value;
             const tel = document.getElementById('formPhone').value;
@@ -501,6 +501,53 @@
             const body = encodeURIComponent(`Ad Soyad: ${ad}\nTelefon: ${tel}\nOrganizasyon Türü: ${tur}\nKişi Sayısı: ${kisi}\nMesaj/Notlar:\n${mesaj}`);
 
             window.location.href = `mailto:unalyemek@gmail.com?subject=${subject}&body=${body}`;
+        }
+
+        // --- YENİ EKLENEN FORMSUBMIT AJAX FONKSİYONU ---
+        async function sendFormWithFormSubmit() {
+            const btn = document.getElementById('formBtn');
+            const originalText = btn.innerText;
+            
+            const formData = {
+                "Müşteri Adı": document.getElementById('formName').value,
+                "Telefon": document.getElementById('formPhone').value,
+                "Organizasyon Türü": document.getElementById('formType').value,
+                "Kişi Sayısı": document.getElementById('formCount').value,
+                "Mesaj": document.getElementById('formMessage').value,
+                "_subject": "Ünal Yemek - Yeni Web Sitesi Teklif Talebi!"
+            };
+
+            if(!formData["Müşteri Adı"] || !formData["Telefon"]) {
+                alert("Lütfen adınızı ve telefon numaranızı girin.");
+                return;
+            }
+
+            btn.innerText = "Gönderiliyor...";
+            btn.disabled = true;
+
+            try {
+                const response = await fetch("https://formsubmit.co/ajax/unalyemek@gmail.com", {
+                    method: "POST",
+                    headers: { 
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    alert("Mesajınız başarıyla Ünal Yemek'e iletildi! Size en kısa sürede dönüş yapacağız.");
+                    document.getElementById('contactForm').reset();
+                } else {
+                    throw new Error("Sunucu hatası");
+                }
+            } catch (error) {
+                console.error(error);
+                alert("Mesaj gönderilemedi, lütfen bizi telefonla arayarak ulaşın.");
+            } finally {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
         }
 
         // --- YAPAY ZEKA MENÜ TASARLAYICI (TAMAMEN GÜNCELLENMİŞ MANTIK) ---
