@@ -10,7 +10,8 @@
     
     <link rel="icon" href="logo.jpg" type="image/jpeg">
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    <script data-cfasync="false" src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     
@@ -27,6 +28,7 @@
         html { scroll-behavior: smooth; }
         body.modal-open { overflow: hidden; }
 
+        /* Scroll Animasyonları */
         .reveal { opacity: 0; transform: translateY(50px); transition: all 1s ease-out; }
         .reveal-left { opacity: 0; transform: translateX(-50px); transition: all 1s ease-out; }
         .reveal-right { opacity: 0; transform: translateX(50px); transition: all 1s ease-out; }
@@ -62,7 +64,7 @@
         <div class="container mx-auto px-4 flex justify-between items-center">
             <div class="flex items-center gap-2 md:gap-3 cursor-pointer" onclick="document.getElementById('hero').scrollIntoView()">
                 <div class="relative flex items-center justify-center shrink-0">
-                    <img src="logo.jpg" alt="Logo" class="w-12 h-12 md:w-16 md:h-16 object-contain bg-white rounded-full p-1 shadow-md">
+                    <img src="logo.jpg" width="64" height="64" alt="Logo" class="w-12 h-12 md:w-16 md:h-16 object-contain bg-white rounded-full p-1 shadow-md">
                 </div>
                 <div class="flex flex-col justify-center">
                     <h1 id="nav-title" class="text-lg md:text-2xl font-bold leading-tight text-white transition-colors">ÜNAL YEMEK</h1>
@@ -129,14 +131,14 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-col lg:flex-row items-start gap-12">
                 <div class="w-full lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-4 reveal-left">
-                    <div class="md:col-span-2"><img src="mutfak-unalyemek.jpg" alt="Mutfak Ekibi" class="rounded-2xl shadow-xl w-full h-64 object-cover"></div>
+                    <div class="md:col-span-2"><img src="mutfak-unalyemek.jpg" alt="Mutfak Ekibi" loading="lazy" class="rounded-2xl shadow-xl w-full h-64 object-cover"></div>
                     <div class="relative group overflow-hidden rounded-xl h-[450px] md:h-56">
-                        <img src="sakirunal-unalyemek.jpg" alt="Kurucumuz Şakir Ünal" class="w-full h-full object-cover object-center">
+                        <img src="sakirunal-unalyemek.jpg" alt="Kurucumuz Şakir Ünal" loading="lazy" class="w-full h-full object-cover object-center">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4 pointer-events-none">
                             <div class="text-white"><p class="font-bold text-sm">Kurucumuz</p><p class="text-lg font-serif">Şakir Ünal</p></div>
                         </div>
                     </div>
-                    <div class="h-64 md:h-56 overflow-hidden rounded-xl"><img src="image_7568a5.jpg" alt="Kazan" class="rounded-xl shadow-lg w-full h-full object-cover"></div>
+                    <div class="h-64 md:h-56 overflow-hidden rounded-xl"><img src="image_7568a5.jpg" alt="Kazan" loading="lazy" class="rounded-xl shadow-lg w-full h-full object-cover"></div>
                 </div>
                 <div class="w-full lg:w-1/2 pt-4 reveal-right">
                     <h3 class="text-red-700 font-bold uppercase tracking-wide mb-2">Hakkımızda</h3>
@@ -163,21 +165,21 @@
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="group bg-stone-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-stone-100 reveal">
                     <div class="h-56 overflow-hidden relative">
-                        <img src="image_755d81.jpg" class="w-full h-full object-cover">
+                        <img src="image_755d81.jpg" loading="lazy" class="w-full h-full object-cover">
                         <div class="absolute bottom-4 left-4 text-white font-bold text-xl pointer-events-none drop-shadow-md">Kurumsal & Dağıtım</div>
                     </div>
                     <div class="p-6"><p class="text-gray-600">Fabrikalar, ofisler, şantiyeler ve iş yerleri için sıcak, hijyenik ve zamanında teslim edilen günlük tabldot yemek servisi. Personelinizin motivasyonunu lezzetli yemeklerle artırın.</p></div>
                 </div>
                 <div class="group bg-stone-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-stone-100 reveal">
                     <div class="h-56 overflow-hidden relative">
-                        <img src="mevlut-unalyemek.jpg" class="w-full h-full object-cover">
+                        <img src="mevlut-unalyemek.jpg" loading="lazy" class="w-full h-full object-cover">
                         <div class="absolute bottom-4 left-4 text-white font-bold text-xl pointer-events-none drop-shadow-md">Mevlit & Davet</div>
                     </div>
                     <div class="p-6"><p class="text-gray-600">Düğün, nişan, sünnet, cenaze ve mevlit gibi özel günlerinizde, misafirlerinize mahçup olmayacağınız geleneksel lezzetler. Pilav üstü kavurma, tavuk sote ve daha fazlası.</p></div>
                 </div>
                 <div class="group bg-stone-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-stone-100 reveal">
                     <div class="h-56 overflow-hidden relative">
-                        <img src="okul-unalyemek.jpg" class="w-full h-full object-cover">
+                        <img src="okul-unalyemek.jpg" loading="lazy" class="w-full h-full object-cover">
                         <div class="absolute bottom-4 left-4 text-white font-bold text-xl pointer-events-none drop-shadow-md">Okul & Kurumlar</div>
                     </div>
                     <div class="p-6"><p class="text-gray-600">Okullar, hastaneler ve kamu kurumları için diyetisyen kontrolünde hazırlanan, besleyici değeri yüksek ve dengeli menüler.</p></div>
@@ -205,10 +207,10 @@
                             <label class="block text-sm font-medium text-gray-700 mb-1">Etkinlik Türü</label>
                             <select id="aiEventType" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 outline-none bg-stone-50">
                                 <option value="Düğün Yemeği">Düğün Yemeği</option>
-                                <option value="Mevlit / Cenaze">Mevlit / Cenaze</option>
+                                <option value="Mevlit Yemeği">Mevlit Yemeği</option>
+                                <option value="Cenaze Yemeği">Cenaze Yemeği</option>
                                 <option value="Kurumsal / Ofis">Kurumsal / Ofis</option>
                                 <option value="İftar Yemeği">İftar Yemeği</option>
-                                <option value="Piknik / Açık Hava">Piknik / Açık Hava</option>
                             </select>
                         </div>
 
@@ -236,7 +238,7 @@
                         <div class="absolute inset-0 bg-white rounded-2xl shadow-xl border border-gray-100 transform lg:-rotate-1 flex flex-col p-6 md:p-8 w-full h-full">
                             
                             <div class="flex items-center justify-center mb-6 shrink-0">
-                                <img src="logo.jpg" class="w-16 h-16 object-contain bg-white rounded-full p-1 shadow-md">
+                                <img src="logo.jpg" width="64" height="64" class="w-16 h-16 object-contain bg-white rounded-full p-1 shadow-md">
                             </div>
                             
                             <div class="flex-grow overflow-y-auto w-full">
@@ -248,15 +250,12 @@
                                     <div class="loader mb-4"></div>
                                     <span class="text-gray-600 font-bold">Ustam En İyisini Hazırlıyor...</span>
                                 </div>
-                                <div id="aiResultState" class="hidden animate-fade-in text-left space-y-4 w-full">
-                                    <div id="aiResultText" class="w-full"></div>
+                                <div id="aiResultState" class="hidden animate-fade-in text-left w-full flex flex-col h-full">
+                                    <div id="aiResultText" class="w-full flex-grow"></div>
+                                    
+                                    <div id="aiWhatsAppContainer" class="pt-4 mt-auto shrink-0 border-t border-dashed border-gray-300">
+                                        </div>
                                 </div>
-                            </div>
-
-                            <div class="pt-4 border-t border-dashed border-gray-300 mt-auto shrink-0">
-                                <button onclick="document.getElementById('contact').scrollIntoView()" class="w-full bg-stone-800 text-white py-3 rounded-lg text-sm font-bold hover:bg-black transition-colors">
-                                    Bu Menü İçin Fiyat Alın
-                                </button>
                             </div>
 
                         </div>
@@ -277,7 +276,7 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="bg-stone-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all reveal">
-                    <img src="4-tavuk-menu-unalyemek.jpg" alt="Tavuklu Pilav" class="w-full h-56 object-cover">
+                    <img src="4-tavuk-menu-unalyemek.jpg" loading="lazy" alt="Tavuklu Pilav" class="w-full h-56 object-cover">
                     <div class="p-5">
                         <h4 class="text-xl font-bold mb-2">Geleneksel Ana Yemekler</h4>
                         <p class="text-gray-400 text-sm">Özel günlerinizin vazgeçilmezi olan Tavuklu Pilav, İzmir Köfte, Tas Kebabı ve Etli Kuru Fasulye gibi klasiklerimiz, usta aşçılarımızın 30 yıllık tecrübesiyle hazırlanır. Günlük taze et ve sebzelerle, anne eli değmiş gibi lezzetli ve sıcak sulu yemek menülerimizle misafirlerinizi ağırlıyoruz.</p>
@@ -285,7 +284,7 @@
                 </div>
 
                 <div class="bg-stone-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all reveal">
-                    <img src="sambali-unalyemek.jpg" alt="Tatlılar" class="w-full h-56 object-cover">
+                    <img src="sambali-unalyemek.jpg" loading="lazy" alt="Tatlılar" class="w-full h-56 object-cover">
                     <div class="p-6">
                         <h4 class="text-xl font-bold text-yellow-500 mb-2">Geleneksel Tatlılarımız</h4>
                         <p class="text-gray-300 text-sm">Yemeğin üzerine yakışacak en güzel final... İster bol fıstıklı bir baklava, ister kıvamında şerbetiyle sıcak bir künefe, isterseniz de hafifliğiyle ferahlatan sütlaç ve kazandibi. Geleneksel Türk mutfağının en sevilen tatlılarını günlük ve taze olarak sunuyoruz.</p>
@@ -293,7 +292,7 @@
                 </div>
 
                 <div class="bg-stone-800 rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all reveal">
-                    <img src="organizasyon2-unalyemek.jpg" alt="Organizasyon" class="w-full h-56 object-cover">
+                    <img src="organizasyon2-unalyemek.jpg" loading="lazy" alt="Organizasyon" class="w-full h-56 object-cover">
                     <div class="p-5">
                         <h4 class="text-xl font-bold mb-2">Toplu Organizasyonlar</h4>
                         <p class="text-gray-400 text-sm">Sadece yemek değil, tam hizmet sunuyoruz. Sokak iftarları, mahalle düğünleri, mevlitler ve kır düğünleri için profesyonel ekibimiz, servis ekipmanlarımız ve güler yüzlü personelimizle yanınızdayız. Siz anın tadını çıkarın, organizasyonun tüm detaylarını biz halledelim.</p>
@@ -308,43 +307,43 @@
             <div class="grid lg:grid-cols-5 gap-8">
                 <div class="lg:col-span-3 bg-white p-8 rounded-2xl shadow-sm reveal-left">
                     <h3 class="text-2xl font-bold mb-6 text-gray-800">Bize Ulaşın</h3>
-                    <form class="space-y-4" onsubmit="event.preventDefault(); alert('Mesajınız alınmıştır! Size en kısa sürede dönüş yapacağız.');">
+                    <form class="space-y-4" id="contactForm">
                         <div class="grid md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Adınız Soyadınız</label>
-                                <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all" placeholder="Örn: Ahmet Yılmaz" required>
+                                <input type="text" id="formName" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all" placeholder="Örn: Ahmet Yılmaz" required>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Telefon Numaranız</label>
-                                <input type="tel" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all" placeholder="05XX XXX XX XX" required>
+                                <input type="tel" id="formPhone" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all" placeholder="05XX XXX XX XX" required>
                             </div>
                         </div>
                         
                         <div class="grid md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Organizasyon Türü</label>
-                                <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none bg-white text-gray-700">
+                                <select id="formType" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none bg-white text-gray-700">
                                     <option value="" disabled selected>Seçiniz</option>
-                                    <option value="Düğün / Nişan">Düğün / Nişan</option>
-                                    <option value="Mevlit / Cenaze">Mevlit / Cenaze</option>
+                                    <option value="Düğün Yemeği">Düğün Yemeği</option>
+                                    <option value="Mevlit Yemeği">Mevlit Yemeği</option>
+                                    <option value="Cenaze Yemeği">Cenaze Yemeği</option>
                                     <option value="Kurumsal / İş Yeri">Kurumsal / İş Yeri</option>
                                     <option value="İftar Yemeği">İftar Yemeği</option>
-                                    <option value="Piknik / Açık Hava">Piknik / Açık Hava</option>
                                     <option value="Diğer">Diğer</option>
                                 </select>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Kişi Sayısı</label>
-                                <input type="number" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all" placeholder="Örn: 100" min="1">
+                                <input type="number" id="formCount" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all" placeholder="Örn: 100" min="1">
                             </div>
                         </div>
 
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Mesajınız / Özel İstekleriniz</label>
-                            <textarea rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all" placeholder="Tarih, menü tercihi vb. detaylar..."></textarea>
+                            <textarea id="formMessage" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all" placeholder="Tarih, menü tercihi vb. detaylar..."></textarea>
                         </div>
 
-                        <button class="w-full bg-gray-900 text-white font-bold py-4 rounded-lg hover:bg-gray-800 transition-colors text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                        <button type="button" onclick="sendMailTo()" class="w-full bg-gray-900 text-white font-bold py-4 rounded-lg hover:bg-gray-800 transition-colors text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                             Teklif Al / Gönder
                         </button>
                     </form>
@@ -394,7 +393,7 @@
                         </div>
                     </div>
                     <div class="bg-gray-200 h-64 rounded-2xl overflow-hidden relative">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3190.237270921471!2d30.7628!3d36.9312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c39aaed8630001%3A0x633519398414441e!2sAlt%C4%B1nova%20Sinan%2C%20%C5%9Eelale%20Sk.%20No%3A54%2C%2007260%20Kepez%2FAntalya!5e0!3m2!1str!2str!4v1698765432100!5m2!1str!2str" width="100%" height="100%" style="border:0" allowfullscreen="" loading="lazy" class="absolute inset-0 w-full h-full"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3190.237270921471!2d30.7628!3d36.9312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c39aaed8630001%3A0x633519398414441e!2sAlt%C4%B1nova%20Sinan%2C%20%C5%9Eelale%20Sk.%20No%3A54%2C%2007260%20Kepez%2FAntalya!5e0!3m2!1str!2str!4v1698765432100!5m2!1str!2str" loading="lazy" width="100%" height="100%" style="border:0" allowfullscreen="" class="absolute inset-0 w-full h-full"></iframe>
                     </div>
                 </div>
             </div>
@@ -470,6 +469,7 @@
             lucide.createIcons();
         });
 
+        // Scroll Reveal
         const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
         const revealOnScroll = () => {
             const windowHeight = window.innerHeight;
@@ -484,24 +484,47 @@
         window.addEventListener('scroll', revealOnScroll);
         revealOnScroll();
 
-        // --- OPENROUTER AI PLANNER (LLAMA 3.1) ---
+        // İletişim Formu E-Posta Gönderme Fonksiyonu (Şimdilik Mailto)
+        function sendMailTo() {
+            const ad = document.getElementById('formName').value;
+            const tel = document.getElementById('formPhone').value;
+            const tur = document.getElementById('formType').value;
+            const kisi = document.getElementById('formCount').value;
+            const mesaj = document.getElementById('formMessage').value;
+
+            if(!ad || !tel) {
+                alert('Lütfen adınızı ve telefon numaranızı girin.');
+                return;
+            }
+
+            const subject = encodeURIComponent(`Yeni Teklif Talebi: ${ad} - ${tur}`);
+            const body = encodeURIComponent(`Ad Soyad: ${ad}\nTelefon: ${tel}\nOrganizasyon Türü: ${tur}\nKişi Sayısı: ${kisi}\nMesaj/Notlar:\n${mesaj}`);
+
+            window.location.href = `mailto:unalyemek@gmail.com?subject=${subject}&body=${body}`;
+        }
+
+        // --- YAPAY ZEKA MENÜ TASARLAYICI (TAMAMEN GÜNCELLENMİŞ MANTIK) ---
         async function generateMenuWithPollinations() {
             const eventType = document.getElementById('aiEventType').value;
             const guestCount = document.getElementById('aiGuestCount').value;
             const notes = document.getElementById('aiNotes').value;
+            
             const errorDiv = document.getElementById('aiError');
             const aiButton = document.getElementById('aiButton');
             const defaultState = document.getElementById('aiDefaultState');
             const loadingState = document.getElementById('aiLoadingState');
             const resultState = document.getElementById('aiResultState');
             const resultText = document.getElementById('aiResultText');
+            const waContainer = document.getElementById('aiWhatsAppContainer');
 
-            if (!guestCount) {
+            // Hata Kontrolü
+            if (eventType !== 'Kurumsal / Ofis' && !guestCount) {
                 errorDiv.innerText = "Lütfen kişi sayısını giriniz.";
                 errorDiv.classList.remove('hidden');
                 return;
             }
 
+            // Arayüzü Bekleme Moduna Al
             errorDiv.classList.add('hidden');
             defaultState.classList.add('hidden');
             resultState.classList.add('hidden');
@@ -509,60 +532,169 @@
             aiButton.disabled = true;
 
             try {
-                const prompt = `Sen Antalya Ünal Yemek catering firmasının 30 yıllık tecrübeli baş aşçısısın. Müşteri: ${eventType}, ${guestCount} kişi. Not: ${notes}. GÖREVİN: Tek bir adet mükemmel menü oluşturmak. Kural: Sadece ve sadece şu formatta cevap ver: Mesaj | Başlık | Çorba | Ana Yemek | Yardımcı | Tatlı/İçecek`;
-
-                // OpenRouter API çağrısı - Yeni Anahtar
-                const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-                    method: "POST",
-                    headers: {
-                        "Authorization": "Bearer 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",
-                        "HTTP-Referer": "https://unalyemek.com",
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        "model": "meta-llama/llama-3.1-8b-instruct:free",
-                        "messages": [
-                            {"role": "user", "content": prompt}
-                        ]
-                    })
-                });
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error?.message || 'Bağlantı hatası.');
-                }
-
-                const data = await response.json();
-                let generatedText = data.choices[0].message.content;
-
-                if (generatedText) {
-                    const parts = generatedText.split('|');
-                    const mesaj = parts[0] ? parts[0].trim() : "Menümüz hazır.";
-                    const baslik = parts[1] ? parts[1].trim() : "Ustanın Altın Menüsü";
-                    const corba = parts[2] ? parts[2].trim() : "Günün Çorbası";
-                    const anaYemek = parts[3] ? parts[3].trim() : "Günün Ana Yemeği";
-                    const yardimci = parts[4] ? parts[4].trim() : "Pirinç Pilavı";
-                    const tatli = parts[5] ? parts[5].trim() : "Mevsim Meyvesi";
-
-                    const htmlOutput = `
-                        <div class="p-4 bg-red-50 rounded-lg text-red-900 italic mb-4 border-l-4 border-red-700">"${mesaj}"</div>
-                        <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 shadow-md">
-                            <h4 class="font-bold text-red-700 text-2xl mb-4 border-b border-red-100 pb-2 text-center">${baslik}</h4>
-                            <ul class="space-y-4 text-gray-800 text-lg">
-                                <li class="flex justify-between items-center border-b border-gray-100 pb-2"><strong>Çorba:</strong> <span>${corba}</span></li>
-                                <li class="flex justify-between items-center border-b border-gray-100 pb-2"><strong>Ana Yemek:</strong> <span>${anaYemek}</span></li>
-                                <li class="flex justify-between items-center border-b border-gray-100 pb-2"><strong>Yardımcı:</strong> <span>${yardimci}</span></li>
-                                <li class="flex justify-between items-center"><strong>İçecek/Tatlı:</strong> <span>${tatli}</span></li>
-                            </ul>
-                        </div>`;
-
-                    resultText.innerHTML = htmlOutput;
+                // 1. KURAL: KURUMSAL İÇİN STATİK MENÜ EKRANI (AI Kullanılmaz)
+                if (eventType === 'Kurumsal / Ofis') {
+                    resultText.innerHTML = `
+                        <div class="p-6 bg-stone-50 rounded-xl border border-stone-200 shadow-md text-center h-full flex flex-col justify-center items-center">
+                            <i data-lucide="building" class="w-16 h-16 text-gray-400 mb-4"></i>
+                            <h4 class="font-bold text-gray-800 text-2xl mb-2">Kurumsal Çözümler</h4>
+                            <p class="text-gray-600 text-lg">Kurumsal ve ofis yemekleri için işletmenize özel aylık menüler hazırlıyoruz. Lütfen bizimle iletişime geçin.</p>
+                        </div>
+                    `;
+                    waContainer.innerHTML = `
+                        <a href="https://wa.me/905067115663?text=Merhaba,%20kurumsal/ofis%20yemekleri%20için%20aylık%20menü%20hakkında%20bilgi%20ve%20fiyat%20almak%20istiyorum." target="_blank" class="w-full flex items-center justify-center gap-2 bg-green-600 text-white py-3 rounded-lg text-sm font-bold hover:bg-green-700 transition-colors">
+                            <i data-lucide="message-circle" class="w-5 h-5"></i> WhatsApp'tan İletişime Geçin
+                        </a>
+                    `;
                     loadingState.classList.add('hidden');
                     resultState.classList.remove('hidden');
+                    lucide.createIcons();
+                    return;
                 }
+
+                // 2. KURAL: CENAZE İÇİN STATİK GELENEKSEL MENÜ (AI Kullanılmaz)
+                if (eventType === 'Cenaze Yemeği') {
+                    const waCenazeText = `Merhaba, AI Aşçıbaşı ile şöyle bir menü oluşturdum:%0A%0A*Etkinlik Türü:* ${eventType}%0A*Kişi Sayısı:* ${guestCount}%0A*Notlar:* ${notes}%0A%0A*Menü:*%0A- Ana Yemek: Kıymalı/Peynirli/Patatesli Pide%0A- İçecek: Ayran%0A- Tatlı: İrmik/Un Helvası%0A%0AFiyat alabilir miyim?`;
+
+                    resultText.innerHTML = `
+                        <div class="p-4 bg-stone-100 rounded-lg text-stone-700 italic mb-4 border-l-4 border-stone-500 text-sm">
+                            "Başınız sağ olsun efendim. Acınızı paylaşıyor, misafirleriniz için en uygun ve geleneksel menüyü hazırlıyoruz."
+                        </div>
+                        <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 shadow-md">
+                            <h4 class="font-bold text-gray-800 text-xl md:text-2xl mb-4 border-b border-gray-200 pb-2 text-center">Cenaze & Taziye Menüsü</h4>
+                            <ul class="space-y-4 text-gray-800 md:text-lg">
+                                <li class="flex justify-between items-center border-b border-gray-100 pb-2">
+                                    <span class="font-bold text-gray-900 w-1/3">Ana Yemek:</span>
+                                    <span class="w-2/3 text-right">Kıymalı, Peynirli veya Patatesli Pide</span>
+                                </li>
+                                <li class="flex justify-between items-center border-b border-gray-100 pb-2">
+                                    <span class="font-bold text-gray-900 w-1/3">Tatlı:</span>
+                                    <span class="w-2/3 text-right">İrmik veya Un Helvası</span>
+                                </li>
+                                <li class="flex justify-between items-center pt-2">
+                                    <span class="font-bold text-gray-900 w-1/3">İçecek:</span>
+                                    <span class="w-2/3 text-right">Kutu Ayran</span>
+                                </li>
+                            </ul>
+                        </div>
+                    `;
+                    waContainer.innerHTML = `
+                        <a href="https://wa.me/905067115663?text=${waCenazeText}" target="_blank" class="w-full flex items-center justify-center gap-2 bg-green-600 text-white py-3 rounded-lg text-sm font-bold hover:bg-green-700 transition-colors">
+                            <i data-lucide="message-circle" class="w-5 h-5"></i> WhatsApp'tan Fiyat Alın
+                        </a>
+                    `;
+                    loadingState.classList.add('hidden');
+                    resultState.classList.remove('hidden');
+                    lucide.createIcons();
+                    return;
+                }
+
+                // 3. KURAL: EKONOMİK VE LÜKS ET KONTROLÜ
+                const noteLower = notes.toLowerCase();
+                const isEconomic = noteLower.includes('ekonomik') || noteLower.includes('uygun') || noteLower.includes('ucuz') || noteLower.includes('bütçe');
+                
+                let meatRule = isEconomic 
+                    ? "KESİNLİKLE kırmızı et (Biftek, Pirzola, Kavurma vb.) ÖNERME. Sadece Tavuk Sote, Etli Nohut, Etli Kuru Fasulye gibi bereketi yüksek yemekler seç." 
+                    : "Lüks etlerden (Pirzola, Biftek vb.) kesinlikle uzak dur. Toplu yemeğe uygun Tavuk veya Et Sote/Kavurma seç.";
+
+                // 4. KURAL: İFTAR İÇİN HURMA ŞARTI
+                const isIftar = eventType === 'İftar Yemeği';
+                const iftarRule = isIftar ? "Menü iftar yemeği olduğu için Başlangıç / Çorba kısmına KESİNLİKLE 'Hurma İftariyelik ve Çorba' yaz." : "";
+
+                // YAPAY ZEKA İÇİN KESİN JSON TALİMATI (Karmaşık yazıları engellemek için)
+                const prompt = `Sen Antalya Ünal Yemek catering firmasının 30 yıllık tecrübeli baş aşçısısın.
+                Müşteri: ${eventType}, ${guestCount} kişi. Notlar: ${notes}.
+
+                KURALLAR:
+                1. ${meatRule}
+                2. Yardımcı yemek SADECE "Pirinç Pilavı" veya "Bulgur Pilavı" olabilir.
+                3. Tatlı ve İçecek SADECE şu klasiklerden seçilmeli: Şambali, Kemalpaşa, Tulumba, Lokma, Şekerpare ve Ayran veya Şerbet.
+                4. ${iftarRule}
+                
+                GÖREVİN: 
+                SADECE VE SADECE aşağıda gösterilen yapıda geçerli bir JSON objesi döndürmek. Başka hiçbir açıklama, selamlama veya markdown işareti kullanma!
+
+                {
+                    "mesaj": "Müşteriye kısa samimi bir usta sözü (Örn: Hoş geldiniz, size uygun menümü hazırladım)",
+                    "baslik": "Ustanın Altın Menüsü",
+                    "corba": "Çorba Adı",
+                    "anaYemek": "Ana Yemek Adı",
+                    "yardimci": "Yardımcı Yemek Adı",
+                    "tatliIcecek": "Tatlı ve İçecek Adı"
+                }`;
+
+                const encodedPrompt = encodeURIComponent(prompt);
+                const response = await fetch(`https://text.pollinations.ai/${encodedPrompt}?model=openai`);
+
+                if (!response.ok) throw new Error('Sunucu hatası: ' + response.status);
+
+                const generatedText = await response.text();
+
+                // 5. KURAL: JSON TEMİZLİĞİ VE AYIKLAMA (Karmaşık Model Hatalarını Çözme)
+                const jsonMatch = generatedText.match(/\{[\s\S]*\}/);
+                if (!jsonMatch) throw new Error("Yapay zeka geçerli bir format döndürmedi.");
+                
+                const menuData = JSON.parse(jsonMatch[0]);
+
+                // 6. KURAL: "PİLAVLI/MAKARNALI" BİRLEŞİK YEMEK KONTROLÜ
+                const anaYemekLower = menuData.anaYemek.toLowerCase();
+                const hideYardimci = anaYemekLower.includes('pilav') || anaYemekLower.includes('makarna');
+
+                // HTML OLUŞTURMA
+                let htmlOutput = `
+                    <div class="p-4 bg-red-50 rounded-lg text-red-900 italic mb-4 border-l-4 border-red-700 text-sm">
+                       "${menuData.mesaj}"
+                    </div>
+                    
+                    <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 shadow-md">
+                        <h4 class="font-bold text-red-700 text-xl md:text-2xl mb-4 border-b border-red-100 pb-2 text-center">${menuData.baslik}</h4>
+                        <ul class="space-y-4 text-gray-800 md:text-lg">
+                            <li class="flex justify-between items-center border-b border-gray-100 pb-2">
+                                <span class="font-bold text-gray-900 w-1/3">Başlangıç/Çorba:</span> 
+                                <span class="w-2/3 text-right">${menuData.corba}</span>
+                            </li>
+                            <li class="flex justify-between items-center border-b border-gray-100 pb-2">
+                                <span class="font-bold text-gray-900 w-1/3">Ana Yemek:</span> 
+                                <span class="w-2/3 text-right">${menuData.anaYemek}</span>
+                            </li>
+                            ${!hideYardimci ? `
+                            <li class="flex justify-between items-center border-b border-gray-100 pb-2">
+                                <span class="font-bold text-gray-900 w-1/3">Yardımcı:</span> 
+                                <span class="w-2/3 text-right">${menuData.yardimci}</span>
+                            </li>` : ''}
+                             <li class="flex justify-between items-center border-b border-gray-100 pb-2">
+                                <span class="font-bold text-gray-900 w-1/3">Salata:</span> 
+                                <span class="w-2/3 text-right">Mevsim Salata</span>
+                            </li>
+                            <li class="flex justify-between items-center pt-2">
+                                <span class="font-bold text-gray-900 w-1/3">Tatlı/İçecek:</span> 
+                                <span class="w-2/3 text-right">${menuData.tatliIcecek}</span>
+                            </li>
+                        </ul>
+                    </div>
+                `;
+
+                resultText.innerHTML = htmlOutput;
+
+                // 7. KURAL: DİNAMİK WHATSAPP BUTONU ENTEGRASYONU
+                let waText = `Merhaba, Ünal Yemek AI Aşçıbaşı ile şöyle bir menü oluşturdum:%0A%0A*Etkinlik Türü:* ${eventType}%0A*Kişi Sayısı:* ${guestCount}%0A*Notlar:* ${notes}%0A%0A*Menü:*%0A- Başlangıç: ${menuData.corba}%0A- Ana Yemek: ${menuData.anaYemek}%0A`;
+                if(!hideYardimci) waText += `- Yardımcı: ${menuData.yardimci}%0A`;
+                waText += `- Salata: Mevsim Salata%0A- Tatlı/İçecek: ${menuData.tatliIcecek}%0A%0A*Bu menü için fiyat alabilir miyim?*`;
+
+                waContainer.innerHTML = `
+                    <a href="https://wa.me/905067115663?text=${waText}" target="_blank" class="w-full flex items-center justify-center gap-2 bg-green-600 text-white py-3 rounded-lg text-sm font-bold hover:bg-green-700 transition-colors">
+                        <i data-lucide="message-circle" class="w-5 h-5"></i> WhatsApp'tan Fiyat Alın
+                    </a>
+                    <p class="text-xs text-gray-500 mt-2 text-center italic">WhatsApp uygulamanız otomatik olarak açılacaktır.</p>
+                `;
+
+                loadingState.classList.add('hidden');
+                resultState.classList.remove('hidden');
+                lucide.createIcons();
+
             } catch (error) {
-                console.error("Hata Detayı:", error);
-                errorDiv.innerText = "Hata: " + error.message; 
+                console.error(error);
+                errorDiv.innerText = "Yapay Zeka Geçici Olarak Yanıt Veremiyor. Lütfen Tekrar Deneyin."; 
                 errorDiv.classList.remove('hidden');
                 loadingState.classList.add('hidden');
             } finally {
